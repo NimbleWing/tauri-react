@@ -12,8 +12,10 @@
   "dependencies": {
     "@tauri-apps/api": "^2",
     "@tauri-apps/plugin-opener": "^2",
+    "@unocss/reset": "^66.5.1",
     "ahooks": "^3.9.5",
     "antd": "^5.27.3",
+    "clsx": "^2.1.1",
     "i18next": "^25.5.2",
     "mac-scrollbar": "^0.13.8",
     "react": "^19.1.0",
@@ -34,8 +36,10 @@
     "globals": "^16.4.0",
     "jiti": "^2.5.1",
     "prettier": "3.6.2",
+    "sass": "^1.92.1",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.43.0",
+    "unocss": "^66.5.1",
     "vite": "^7.0.4"
   }
 }
