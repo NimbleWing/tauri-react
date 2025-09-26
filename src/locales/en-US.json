@@ -1,6 +1,10 @@
 {
   "Main": {
-    "title": "HYP"
+    "title": "HYP",
+    "sidebarNav": {
+      "settings": "Settings",
+      "app": "App"
+    }
   },
   "ButtonTip": {
     "close": "Close",

@@ -1,6 +1,10 @@
 {
   "Main": {
-    "title": "红"
+    "title": "红",
+    "sidebarNav": {
+      "settings": "设置",
+      "app": "应用"
+    }
   },
   "ButtonTip": {
     "close": "关闭",
