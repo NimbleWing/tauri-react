@@ -1,5 +1,5 @@
 import { createHashRouter } from 'react-router';
-import Main from '@/pages/Main';
+import Main from '@/features/Main';
 
 export const router = createHashRouter([
   {
