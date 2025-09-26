@@ -1,0 +1,13 @@
+{
+  "Main": {
+    "title": "HYP"
+  },
+  "ButtonTip": {
+    "close": "Close",
+    "minimize": "Minimize",
+    "maximize": "Maximize",
+    "restore": "Restore",
+    "alwaysOnTop": "Sticky",
+    "notAlwaysOnTop": "Remove Sticky"
+  }
+}

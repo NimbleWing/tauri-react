@@ -12,9 +12,13 @@
   "app": {
     "windows": [
       {
-        "title": "tauri-app",
-        "width": 800,
-        "height": 600
+        "title": "HYP",
+        "label": "main",
+        "decorations": false,
+        "width": 1600,
+        "height": 900,
+        "center": true,
+        "visible": true
       }
     ],
     "security": {

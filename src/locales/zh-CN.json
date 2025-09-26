@@ -1,0 +1,13 @@
+{
+  "Main": {
+    "title": "红"
+  },
+  "ButtonTip": {
+    "close": "关闭",
+    "minimize": "最小化",
+    "maximize": "最大化",
+    "restore": "还原",
+    "alwaysOnTop": "置顶",
+    "notAlwaysOnTop": "取消置顶"
+  }
+}
