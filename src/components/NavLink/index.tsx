@@ -12,6 +12,7 @@ type NavLinkProps = {
 
 const NavLink = ({ url, title, icon: Icon, className }: NavLinkProps) => {
   const location = useLocation();
+  console.log(location);
   return (
     <Button
       as={Link}

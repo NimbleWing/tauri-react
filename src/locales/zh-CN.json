@@ -4,6 +4,10 @@
     "sidebarNav": {
       "settings": "设置",
       "app": "应用"
+    },
+    "settings": {
+      "preference": "偏好",
+      "about": "关于"
     }
   },
   "ButtonTip": {

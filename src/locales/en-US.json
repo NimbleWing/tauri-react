@@ -4,6 +4,10 @@
     "sidebarNav": {
       "settings": "Settings",
       "app": "App"
+    },
+    "settings": {
+      "preference": "Preference",
+      "about": "About"
     }
   },
   "ButtonTip": {
