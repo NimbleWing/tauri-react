@@ -18,6 +18,7 @@
     "i18next": "^25.5.2",
     "lucide-react": "^0.544.0",
     "mac-scrollbar": "^0.13.8",
+    "motion": "^12.23.22",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hotkeys-hook": "^5.1.0",
