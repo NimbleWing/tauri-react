@@ -1,0 +1,17 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  init:
+    desc: Install dependencies
+    cmds:
+      - pnpm install
+  dev:
+    desc: Run Desktop development
+    cmds:
+      - pnpm run tauri dev
+  dev-android:
+    desc: Run Android development
+    cmds:
+      - pnpm tauri android dev
