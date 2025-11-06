@@ -3,7 +3,19 @@
     "title": "HYP",
     "sidebarNav": {
       "settings": "Settings",
-      "app": "App"
+      "app": "App",
+      "home": "Home"
+    },
+    "settings": {
+      "preference": "Preference",
+      "about": "About"
+    },
+    "preference": {
+      "theme": "Theme",
+      "light-mode": "Light Mode",
+      "dark-mode": "Dark Mode",
+      "follow-system": "Follow System",
+      "language": "Language"
     }
   },
   "ButtonTip": {

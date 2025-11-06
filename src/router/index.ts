@@ -1,9 +1,15 @@
-import { createHashRouter } from 'react-router';
-import Main from '@/features/Main';
+import { createBrowserRouter } from 'react-router';
+import Settings from '@/features/Main/pages/Settings';
+import { CommonLayout } from '@/components/Layout';
+import Home from '@/features/Main/pages/Home';
 
-export const router = createHashRouter([
+export const router = createBrowserRouter([
   {
     path: '/',
-    Component: Main,
+    Component: CommonLayout,
+    children: [
+      { path: 'home', Component: Home },
+      { path: 'settings', Component: Settings },
+    ],
   },
 ]);

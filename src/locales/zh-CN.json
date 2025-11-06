@@ -3,7 +3,19 @@
     "title": "红",
     "sidebarNav": {
       "settings": "设置",
-      "app": "应用"
+      "app": "应用",
+      "home": "首页"
+    },
+    "settings": {
+      "preference": "偏好",
+      "about": "关于"
+    },
+    "preference": {
+      "theme": "主题",
+      "light-mode": "浅色模式",
+      "dark-mode": "深色模式",
+      "follow-system": "跟随系统",
+      "language": "语言"
     }
   },
   "ButtonTip": {
