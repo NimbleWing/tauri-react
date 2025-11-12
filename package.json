@@ -19,6 +19,7 @@
     "@tauri-apps/plugin-opener": "^2",
     "ahooks": "^3.9.5",
     "clsx": "^2.1.1",
+    "es-toolkit": "^1.41.0",
     "i18next": "^25.5.2",
     "lucide-react": "^0.544.0",
     "mac-scrollbar": "^0.13.8",
