@@ -13,7 +13,14 @@ export default defineConfig([
     extends: ['js/recommended'],
     languageOptions: { globals: globals.browser },
   },
-  tseslint.configs.recommended,
+  {
+    files: ['**/*.{ts,mts,cts,tsx}'],
+    extends: [tseslint.configs.recommended],
+    rules: {
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    },
+  },
+
   pluginReact.configs.flat.recommended,
   eslintPluginPrettierRecommended,
   pluginReact.configs.flat['jsx-runtime'],
