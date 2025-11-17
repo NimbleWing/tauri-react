@@ -1,0 +1,36 @@
+{
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "cSpell.words": [
+    "tauri",
+    "serde",
+    "staticlib",
+    "cdylib",
+    "rlib",
+    "ntvs",
+    "njsproj",
+    "MSVC",
+    "rustc",
+    "vite",
+    "Avenir",
+    "autolaunch",
+    "splashscreen",
+    "icns",
+    "mantine",
+    "nowrap",
+    "heroui",
+    "overscan"
+  ],
+  "react-i18n.i18nPaths": "d:\\NimbleWing\\tauri-react\\src\\locales,/D:/NimbleWing/tauri-react/src/locales",
+  "i18n-ally.localesPaths": ["src/locales"],
+  "i18n-ally.displayLanguage": "zh-CN",
+  "i18n-ally.sourceLanguage": "zh-CN",
+  "i18n-ally.keystyle": "nested",
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+  }
+}
