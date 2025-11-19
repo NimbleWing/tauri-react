@@ -4,7 +4,8 @@
     "sidebarNav": {
       "settings": "设置",
       "app": "应用",
-      "home": "首页"
+      "home": "首页",
+      "music": "音乐"
     },
     "settings": {
       "preference": "偏好",
@@ -16,6 +17,17 @@
       "dark-mode": "深色模式",
       "follow-system": "跟随系统",
       "language": "语言"
+    }
+  },
+  "MusicPlayer": {
+    "title": "音乐播放器",
+    "sidebarNav": {
+      "settings": "音乐设置",
+      "tracks": "歌曲",
+      "albums": "专辑",
+      "artists": "歌手",
+      "queue": "播放队列",
+      "playlists": "播放列表"
     }
   },
   "ButtonTip": {

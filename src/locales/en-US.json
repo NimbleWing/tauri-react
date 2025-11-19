@@ -4,7 +4,8 @@
     "sidebarNav": {
       "settings": "Settings",
       "app": "App",
-      "home": "Home"
+      "home": "Home",
+      "music": "Music"
     },
     "settings": {
       "preference": "Preference",
@@ -16,6 +17,17 @@
       "dark-mode": "Dark Mode",
       "follow-system": "Follow System",
       "language": "Language"
+    }
+  },
+  "MusicPlayer": {
+    "title": "Music Player",
+    "sidebarNav": {
+      "settings": "Settings",
+      "tracks": "Tracks",
+      "albums": "Albums",
+      "artists": "Artists",
+      "queue": "Queue",
+      "playlists": "Playlists"
     }
   },
   "ButtonTip": {
