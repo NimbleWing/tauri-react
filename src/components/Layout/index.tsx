@@ -12,7 +12,9 @@ export const CommonLayout = () => {
   const showBars = true;
   return (
     <>
-      <div className="flex items-center pointer-events-auto fixed inset-x-0 top-0 z-100 bg-default-50/25 backdrop-blur-lg backdrop-saturate-125">
+      <div
+        data-tauri-drag-region
+        className="flex items-center pointer-events-auto fixed inset-x-0 top-0 z-100 bg-default-50/25 backdrop-blur-lg backdrop-saturate-125">
         <div className="ml-auto"></div>
         <WindowControls />
       </div>
