@@ -4,7 +4,10 @@
     "sidebarNav": {
       "settings": "Settings",
       "app": "App",
-      "home": "Home"
+      "home": "Home",
+      "music": "Music",
+      "hyp": "HYP",
+      "toolbox": "ToolBox"
     },
     "settings": {
       "preference": "Preference",
@@ -16,6 +19,35 @@
       "dark-mode": "Dark Mode",
       "follow-system": "Follow System",
       "language": "Language"
+    }
+  },
+  "MusicPlayer": {
+    "title": "Music Player",
+    "sidebarNav": {
+      "settings": "Settings",
+      "tracks": "Tracks",
+      "albums": "Albums",
+      "artists": "Artists",
+      "queue": "Queue",
+      "playlists": "Playlists"
+    }
+  },
+  "HYP": {
+    "title": "HYP",
+    "sidebarNav": {
+      "settings": "Settings",
+      "tags": "Tags",
+      "performers": "Performers",
+      "studios": "Studios"
+    }
+  },
+  "ToolBox": {
+    "title": "ToolBox",
+    "sidebarNav": {
+      "video": "Video",
+      "videoScan": "Video Scan",
+      "videoProbe": "Video Probe",
+      "videoListProbe": "Video List Probe"
     }
   },
   "ButtonTip": {

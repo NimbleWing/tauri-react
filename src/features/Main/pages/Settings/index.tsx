@@ -6,7 +6,7 @@ import { AboutSetting } from './AboutSetting';
 import { Link } from 'react-router';
 import { Button } from '@heroui/react';
 import { PreferSetting } from './PreferSetting';
-type SettingItem = {
+export type SettingItem = {
   key: string;
   title: string;
   icon: LucideIcon;

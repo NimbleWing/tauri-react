@@ -5,7 +5,7 @@
   "identifier": "com.nw.tauri-app",
   "build": {
     "beforeDevCommand": "pnpm dev",
-    "devUrl": "http://localhost:1420",
+    "devUrl": "http://localhost:3000",
     "beforeBuildCommand": "pnpm build",
     "frontendDist": "../dist"
   },
@@ -22,7 +22,17 @@
       }
     ],
     "security": {
-      "csp": null
+      "dangerousDisableAssetCspModification": [
+        "style-src"
+      ],
+      "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' ipc: http://ipc.localhost; img-src * data: asset:; media-src * data: asset: http://asset.localhost;",
+      "devCsp": "default-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' ipc: http://ipc.localhost; img-src * data: asset:; media-src * data: asset: http://asset.localhost;",
+      "assetProtocol": {
+        "enable": true,
+        "scope": [
+          "**/*"
+        ]
+      }
     }
   },
   "bundle": {
