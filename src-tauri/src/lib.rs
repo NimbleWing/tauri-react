@@ -40,6 +40,7 @@ pub async fn run() -> Result<()> {
             cmd_video::video_cover,
             cmd_video::video_probe,
             cmd_video::video_list_probe,
+            cmd_video::check_folder_exists,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

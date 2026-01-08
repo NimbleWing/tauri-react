@@ -41,6 +41,12 @@ pub async fn video_list_probe(video_dir: PathBuf, app_handle: AppHandle) -> Resu
     VideoService::probe_video_list(&video_dir, app_handle).await
 }
 
+#[tauri::command]
+pub async fn check_folder_exists(base_dir: String, folder_name: String) -> Result<bool, String> {
+    let path = PathBuf::from(base_dir).join(folder_name);
+    Ok(path.exists() && path.is_dir())
+}
+
 #[derive(Serialize, Clone)]
 struct CoverPayload {
     path: String,

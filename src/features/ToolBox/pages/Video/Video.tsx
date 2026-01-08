@@ -2,7 +2,7 @@
 import { useEffect, useReducer, useRef } from 'react';
 import { Button } from '@heroui/react';
 import { MousePointerClick } from 'lucide-react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { addToast } from '@heroui/react';
 import { Item, PathGroup } from './PathGroup';
 import { MetaForm } from './MetaForm';
@@ -10,6 +10,8 @@ import { CoverPicker } from './CoverPicker';
 import { AttachMetadataAndCoverToVideo } from '.';
 import { metaFields } from './meta/fields';
 import { loadState, saveState } from './persistent';
+import { getPerformers } from '@/features/HYP';
+import { invoke } from '@tauri-apps/api/core';
 
 /* ---------------- 类型 & 初始值 ---------------- */
 type PickKey = 'saveDir' | 'video' | 'cover';
@@ -50,6 +52,44 @@ export const VideoTool = () => {
   const canRun = Boolean(
     state.paths.saveDir && state.paths.video && requiredKeys.every(k => state.meta[k]?.trim() !== ''),
   );
+
+  /* 查询 performers 用于检查文件夹 */
+  useQuery({
+    queryKey: ['performers'],
+    queryFn: getPerformers,
+  });
+
+  /* 当 performers 变化时检查文件夹 */
+  useEffect(() => {
+    const checkFolders = async () => {
+      const performerNames = state.meta.performers
+        .split(',')
+        .map(s => s.trim())
+        .filter(Boolean);
+
+      if (performerNames.length === 0 || !state.paths.saveDir) return;
+
+      for (const name of performerNames) {
+        try {
+          const exists = await invoke('check_folder_exists', {
+            baseDir: state.paths.saveDir,
+            folderName: `【${name}】`,
+          });
+          if (!exists) {
+            addToast({
+              timeout: 5000,
+              color: 'warning',
+              title: `Folder not found: "【${name}】" in output folder`,
+            });
+          }
+        } catch (e) {
+          console.error('Failed to check folder:', e);
+        }
+      }
+    };
+
+    checkFolders();
+  }, [state.meta.performers, state.paths.saveDir]);
 
   const { mutate, isPending } = useMutation({
     mutationFn: () =>
