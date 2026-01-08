@@ -153,7 +153,7 @@ export const Tags = () => {
             </div>
           </ModalHeader>
           <ModalBody>
-            <p className="text-default-500">Are you sure you want to delete "{tagToDelete?.name}"?</p>
+            <p className="text-default-500">Are you sure you want to delete &apos;{tagToDelete?.name}&apos;?</p>
             <p className="text-sm text-default-400">This action cannot be undone.</p>
           </ModalBody>
           <ModalFooter>
