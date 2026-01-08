@@ -30,6 +30,7 @@ pub async fn run() -> Result<()> {
             cmd_tag::tag_add,
             cmd_tag::tag_list,
             cmd_tag::tag_delete,
+            cmd_tag::tag_update,
             cmd_studio::studio_add,
             cmd_studio::studio_list,
             cmd_performer::performer_add,

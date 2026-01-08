@@ -53,4 +53,20 @@ impl TagRepo<'_, '_> {
         .await?;
         Ok(())
     }
+
+    pub async fn update(pool: &SqlitePool, id: i64, name: &str, sort_name: Option<&str>) -> Result<()> {
+        let now = Utc::now().to_rfc3339();
+        sqlx::query!(
+            r#"
+              UPDATE tags SET name = ?, sort_name = ?, updated_at = ? WHERE id = ?
+            "#,
+            name,
+            sort_name,
+            now,
+            id
+        )
+        .execute(pool)
+        .await?;
+        Ok(())
+    }
 }

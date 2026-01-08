@@ -1,7 +1,7 @@
 use anyhow::Result;
 use sqlx::SqlitePool;
 
-use crate::app::tag::{dto::CreateTagDto, repo::TagRepo, vo::TagDetailVo};
+use crate::app::tag::{dto::CreateTagDto, dto::UpdateTagDto, repo::TagRepo, vo::TagDetailVo};
 
 pub struct TagService {
     pool: SqlitePool,
@@ -43,5 +43,11 @@ impl TagService {
      */
     pub async fn delete(&self, tag_id: i64) -> Result<()> {
         TagRepo::delete(&self.pool, tag_id).await
+    }
+    /**
+     * 更新标签
+     */
+    pub async fn update(&self, dto: UpdateTagDto) -> Result<()> {
+        TagRepo::update(&self.pool, dto.id, &dto.name, dto.sort_name.as_deref()).await
     }
 }

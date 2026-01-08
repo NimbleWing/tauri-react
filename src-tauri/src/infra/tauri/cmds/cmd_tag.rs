@@ -1,6 +1,7 @@
 use std::sync::Arc;
 
 use crate::app::tag::dto::CreateTagDto;
+use crate::app::tag::dto::UpdateTagDto;
 use crate::app::tag::vo::TagDetailVo;
 use crate::AppService;
 use anyhow::Result;
@@ -20,4 +21,11 @@ pub async fn tag_add(
 #[tauri::command]
 pub async fn tag_delete(tag_id: i64, service: State<'_, Arc<AppService>>) -> Result<(), String> {
     service.tag.delete(tag_id).await.map_err(|e| e.to_string())
+}
+#[tauri::command]
+pub async fn tag_update(
+    dto: UpdateTagDto,
+    service: State<'_, Arc<AppService>>,
+) -> Result<(), String> {
+    service.tag.update(dto).await.map_err(|e| e.to_string())
 }
