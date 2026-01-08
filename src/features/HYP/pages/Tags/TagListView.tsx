@@ -4,7 +4,7 @@ import { TrashIcon, HashIcon } from 'lucide-react';
 
 type Props = {
   tag: Tag;
-  onDelete?: (id: number) => void;
+  onDelete?: (id: number, name: string) => void;
 };
 
 export function TagCard({ tag, onDelete }: Props) {
@@ -27,7 +27,7 @@ export function TagCard({ tag, onDelete }: Props) {
         variant="light"
         color="danger"
         className="opacity-0 group-hover:opacity-100 transition-opacity"
-        onPressStart={() => onDelete?.(id)}>
+        onPressStart={() => onDelete?.(id, name)}>
         <TrashIcon className="w-4 h-4" />
       </Button>
     </div>
