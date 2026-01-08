@@ -4,7 +4,10 @@
     "sidebarNav": {
       "settings": "设置",
       "app": "应用",
-      "home": "首页"
+      "home": "首页",
+      "music": "音乐",
+      "hyp": "红颜谱",
+      "toolbox": "工具箱"
     },
     "settings": {
       "preference": "偏好",
@@ -16,6 +19,35 @@
       "dark-mode": "深色模式",
       "follow-system": "跟随系统",
       "language": "语言"
+    }
+  },
+  "MusicPlayer": {
+    "title": "音乐播放器",
+    "sidebarNav": {
+      "settings": "音乐设置",
+      "tracks": "歌曲",
+      "albums": "专辑",
+      "artists": "歌手",
+      "queue": "播放队列",
+      "playlists": "播放列表"
+    }
+  },
+  "HYP": {
+    "title": "红颜谱",
+    "sidebarNav": {
+      "settings": "红颜谱设置",
+      "tags": "标签",
+      "performers": "演员",
+      "studios": "工作室"
+    }
+  },
+  "ToolBox": {
+    "title": "工具箱",
+    "sidebarNav": {
+      "video": "视频处理",
+      "videoScan": "视频扫描",
+      "videoProbe": "视频探针",
+      "videoListProbe": "视频列表探针"
     }
   },
   "ButtonTip": {

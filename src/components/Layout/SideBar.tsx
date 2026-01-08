@@ -1,5 +1,5 @@
 import { ScrollShadow } from '@heroui/react';
-import { HomeIcon, Settings } from 'lucide-react';
+import { HomeIcon, Settings, Music, PersonStanding, Wrench } from 'lucide-react';
 import { useEffect } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 import NavLink from '@/components/NavLink';
@@ -22,6 +22,9 @@ export const SideBar = () => {
       <ScrollShadow className="-mr-[16px] mt-[-5px] h-full max-h-full pr-6 hide-scrollbar">
         <div className={`flex flex-col gap-1 mt-4 font-semibold }`}>
           <NavLink url="/home" title={t('Main.sidebarNav.home')} icon={HomeIcon} />
+          <NavLink url="/music" title={t('Main.sidebarNav.music')} icon={Music} />
+          <NavLink url="/hyp" title={t('Main.sidebarNav.hyp')} icon={PersonStanding} />
+          <NavLink url="/toolbox" title={t('Main.sidebarNav.toolbox')} icon={Wrench} />
           <NavLink url="/settings" title={t('Main.sidebarNav.settings')} icon={Settings} />
         </div>
       </ScrollShadow>

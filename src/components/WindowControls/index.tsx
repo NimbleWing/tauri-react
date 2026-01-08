@@ -1,6 +1,7 @@
-import { Button, Tooltip } from '@heroui/react';
+import useMusicPlayerStore from '@/features/MusicPlayer/store/musicPlayerStore';
+import { Button, Popover, PopoverContent, PopoverTrigger, Slider, Tooltip } from '@heroui/react';
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import { CopyIcon, MinusIcon, PinIcon, SquareIcon, XIcon } from 'lucide-react';
+import { CopyIcon, MinusIcon, PinIcon, SquareIcon, Volume1Icon, Volume2Icon, VolumeXIcon, XIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -38,8 +39,46 @@ const WindowControls = () => {
     await currentWindow.setAlwaysOnTop(!isOnTop);
     setIsOnTop(!isOnTop);
   };
+  const [showVolumeControls, setShowVolumeControls] = useState(false);
+  const globalVolume = useMusicPlayerStore(s => s.volume * 100);
+  const setVolume = useMusicPlayerStore(s => s.setVolume);
   return (
     <>
+      <Popover
+        placement="left"
+        containerPadding={8}
+        radius="sm"
+        isOpen={showVolumeControls}
+        onOpenChange={setShowVolumeControls}>
+        <PopoverTrigger>
+          <Button isIconOnly radius="none" variant="light">
+            <Volume2Icon className="text-lg text-default-500" />
+          </Button>
+        </PopoverTrigger>
+
+        <PopoverContent>
+          <div className="w-100 flex items-center gap-2 py-2">
+            <Button
+              isIconOnly
+              radius="sm"
+              variant="flat"
+              color={globalVolume > 0 ? 'default' : 'warning'}
+              onPress={() => setVolume(globalVolume > 0 ? 0 : globalVolume / 100)}>
+              {globalVolume > 0 ? <Volume1Icon className="text-lg" /> : <VolumeXIcon className="text-lg" />}
+            </Button>
+
+            <Slider
+              size="sm"
+              minValue={0}
+              maxValue={100}
+              label="Volume"
+              color="foreground"
+              value={globalVolume}
+              onChange={value => setVolume(typeof value === 'number' ? value / 100 : value[0] / 100)}
+            />
+          </div>
+        </PopoverContent>
+      </Popover>
       <Tooltip content={t(isOnTop ? 'ButtonTip.notAlwaysOnTop' : 'ButtonTip.alwaysOnTop')}>
         <Button
           radius="none"

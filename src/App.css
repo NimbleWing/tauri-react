@@ -68,7 +68,26 @@
   font-weight: 400;
   font-style: normal;
 }
+::-webkit-scrollbar {
+  background: transparent;
+  width: 8px;
+  height: 6px;
+}
 
+::-webkit-scrollbar-track {
+  background: transparent;
+  transition: all 1s;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #292929;
+  border-radius: 1px;
+  transition: all 1s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, #292929 80%, transparent);
+}
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -76,4 +95,47 @@
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+/* From Uiverse.io by LilaRest */
+.card {
+  --bg: #e8e8e8;
+  --contrast: #e2e0e0;
+  --grey: #93a1a1;
+  position: relative;
+  padding: 9px;
+  background-color: var(--bg);
+  border-radius: 35px;
+  margin-right: 10px;
+  box-shadow:
+    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  filter: opacity(10%) contrast(105%);
+}
+
+.card-inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 190px;
+  height: 254px;
+  background-color: var(--contrast);
+  border-radius: 30px;
+  /* Content style */
+  font-size: 30px;
+  font-weight: 900;
+  color: #c7c4c4;
+  text-align: center;
+  font-family: monospace;
 }
