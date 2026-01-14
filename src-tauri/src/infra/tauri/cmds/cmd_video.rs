@@ -129,3 +129,21 @@ pub async fn video_covers(video_path: String) -> Result<String, String> {
     let b64 = base64::engine::general_purpose::STANDARD.encode(&img);
     Ok(format!("data:image/jpeg;base64,{b64}"))
 }
+
+#[tauri::command]
+pub async fn create_folder(path: String) -> Result<(), String> {
+    use std::fs;
+
+    let path = PathBuf::from(&path);
+
+    if let Some(parent) = path.parent() {
+        if !parent.exists() {
+            return Err(format!("Parent directory does not exist: {:?}", parent));
+        }
+    }
+
+    fs::create_dir_all(&path)
+        .map_err(|e| format!("Failed to create directory: {}", e))?;
+
+    Ok(())
+}

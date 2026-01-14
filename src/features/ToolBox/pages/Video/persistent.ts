@@ -1,8 +1,12 @@
 // src/utils/persistent.ts
-const STORAGE_KEY = 'videoTool_state_v1'; // 加版本号，后续改结构可迁移
+const STORAGE_KEY = 'videoTool_state_v2'; // 版本升级
 
 interface PersistedState {
-  paths: Record<string, string>;
+  paths: {
+    outputBaseDir: string;
+    video: string;
+    cover: string;
+  };
   meta: Record<string, string>;
 }
 
@@ -34,7 +38,7 @@ export function saveState(state: PersistedState): void {
 /** 初始缺省值（与你在组件里写的一致） */
 function getDefaultState(): PersistedState {
   return {
-    paths: { saveDir: '', video: '', cover: '' },
+    paths: { outputBaseDir: '', video: '', cover: '' },
     meta: {
       title: '标题',
       subtitle: '副标题',

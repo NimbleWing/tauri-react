@@ -1,7 +1,7 @@
 // src/pages/VideoTool.tsx
-import { useEffect, useReducer, useRef } from 'react';
-import { Button } from '@heroui/react';
-import { MousePointerClick } from 'lucide-react';
+import { useEffect, useReducer, useRef, useState } from 'react';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, ModalContent } from '@heroui/react';
+import { MousePointerClick, Folder as FolderIcon, X, AlertCircle, Loader2, FolderPlus, Check } from 'lucide-react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { addToast } from '@heroui/react';
 import { Item, PathGroup } from './PathGroup';
@@ -12,16 +12,17 @@ import { metaFields } from './meta/fields';
 import { loadState, saveState } from './persistent';
 import { getPerformers } from '@/features/HYP';
 import { invoke } from '@tauri-apps/api/core';
+import { cn } from '@heroui/react';
 
 /* ---------------- 类型 & 初始值 ---------------- */
-type PickKey = 'saveDir' | 'video' | 'cover';
+type PickKey = 'outputBaseDir' | 'video' | 'cover';
 interface State {
   paths: Record<PickKey, string>;
   meta: Record<string, string>;
 }
 
 const pathItems: Item[] = [
-  { key: 'saveDir', label: 'Output folder', desc: 'Where to save the final video', kind: 'folder' },
+  { key: 'outputBaseDir', label: 'Output base folder', desc: 'Performer folders will be created here', kind: 'folder' },
   { key: 'video', label: 'Video', desc: 'Source video file', kind: 'video', exts: ['mp4', 'mkv', 'mov'] },
 ];
 
@@ -46,11 +47,37 @@ export const VideoTool = () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
   }, [state]);
-  // const canRun = state.paths.saveDir && state.paths.video && state.meta.title.trim() !== '';
+
+  const [folderStatus, setFolderStatus] = useState<{
+    exists: boolean | null;
+    performerName: string;
+    fullPath: string;
+  }>({ exists: null, performerName: '', fullPath: '' });
+  const [showCreateDialog, setShowCreateDialog] = useState(false);
+
   const requiredKeys = metaFields.filter(f => f.required).map(f => f.key);
 
+  const getFirstPerformer = (): string | null => {
+    const performers = state.meta.performers
+      .split(',')
+      .map(s => s.trim())
+      .filter(Boolean);
+    return performers.length > 0 ? performers[0] : null;
+  };
+
+  const getActualSaveDir = (): string | null => {
+    const baseDir = state.paths.outputBaseDir;
+    const firstPerformer = getFirstPerformer();
+    if (!baseDir) return null;
+    if (!firstPerformer) return baseDir;
+    return `${baseDir}/【${firstPerformer}】`;
+  };
+
   const canRun = Boolean(
-    state.paths.saveDir && state.paths.video && requiredKeys.every(k => state.meta[k]?.trim() !== ''),
+    state.paths.outputBaseDir &&
+      state.paths.video &&
+      requiredKeys.every(k => state.meta[k]?.trim() !== '') &&
+      folderStatus.exists === true,
   );
 
   /* 查询 performers 用于检查文件夹 */
@@ -59,43 +86,107 @@ export const VideoTool = () => {
     queryFn: getPerformers,
   });
 
-  /* 当 performers 变化时检查文件夹 */
+  /* 当 performers 变化时检查第一个演员的文件夹 */
   useEffect(() => {
-    const checkFolders = async () => {
-      const performerNames = state.meta.performers
+    const checkFolder = async () => {
+      const firstPerformer = getFirstPerformer();
+      const baseDir = state.paths.outputBaseDir;
+
+      if (!firstPerformer || !baseDir) {
+        setFolderStatus({ exists: null, performerName: '', fullPath: '' });
+        setShowCreateDialog(false);
+        return;
+      }
+
+      const folderName = `【${firstPerformer}】`;
+      const fullPath = `${baseDir}\\${folderName}`;
+
+      try {
+        const exists = await invoke<boolean>('check_folder_exists', {
+          baseDir: baseDir,
+          folderName: folderName,
+        });
+
+        setFolderStatus({ exists, performerName: firstPerformer, fullPath });
+
+        if (!exists) {
+          setShowCreateDialog(true);
+        } else {
+          setShowCreateDialog(false);
+        }
+      } catch (e) {
+        console.error('Failed to check folder:', e);
+        setFolderStatus({ exists: null, performerName: firstPerformer, fullPath });
+      }
+    };
+
+    checkFolder();
+  }, [state.meta.performers, state.paths.outputBaseDir]);
+
+  const handleCreateFolder = async () => {
+    if (!folderStatus.fullPath) return;
+
+    try {
+      await invoke('create_folder', {
+        path: folderStatus.fullPath,
+      });
+
+      setShowCreateDialog(false);
+      setFolderStatus({ ...folderStatus, exists: true });
+
+      addToast({
+        timeout: 3000,
+        color: 'success',
+        title: `Folder created: 【${folderStatus.performerName}】`,
+      });
+    } catch (e) {
+      addToast({
+        timeout: 5000,
+        color: 'danger',
+        title: `Failed to create folder: ${e}`,
+      });
+
+      const currentPerformers = state.meta.performers || '';
+      const performerArray = currentPerformers
         .split(',')
         .map(s => s.trim())
         .filter(Boolean);
 
-      if (performerNames.length === 0 || !state.paths.saveDir) return;
-
-      for (const name of performerNames) {
-        try {
-          const exists = await invoke('check_folder_exists', {
-            baseDir: state.paths.saveDir,
-            folderName: `【${name}】`,
-          });
-          if (!exists) {
-            addToast({
-              timeout: 5000,
-              color: 'warning',
-              title: `Folder not found: "【${name}】" in output folder`,
-            });
-          }
-        } catch (e) {
-          console.error('Failed to check folder:', e);
-        }
+      if (performerArray.length > 0) {
+        const newPerformers = performerArray.slice(1).join(',');
+        dispatch({ type: 'SET_META', key: 'performers', value: newPerformers });
       }
-    };
 
-    checkFolders();
-  }, [state.meta.performers, state.paths.saveDir]);
+      setShowCreateDialog(false);
+    }
+  };
+
+  const handleCancelCreate = () => {
+    setShowCreateDialog(false);
+
+    const currentPerformers = state.meta.performers || '';
+    const performerArray = currentPerformers
+      .split(',')
+      .map(s => s.trim())
+      .filter(Boolean);
+
+    if (performerArray.length > 0) {
+      const newPerformers = performerArray.slice(1).join(',');
+      dispatch({ type: 'SET_META', key: 'performers', value: newPerformers });
+    }
+
+    addToast({
+      timeout: 3000,
+      color: 'warning',
+      title: `Cancelled: Removed ${folderStatus.performerName}`,
+    });
+  };
 
   const { mutate, isPending } = useMutation({
     mutationFn: () =>
       AttachMetadataAndCoverToVideo(
         state.paths.video,
-        state.paths.saveDir,
+        getActualSaveDir()!,
         {
           title: state.meta.title.trim(),
           subtitle: state.meta.subtitle.trim(),
@@ -150,33 +241,93 @@ export const VideoTool = () => {
   });
 
   return (
-    <div className="w-full overflow-auto p-3 pt-[calc(theme(spacing.10)+theme(spacing.3))]">
-      <div className="flex flex-col gap-6">
-        {/* 路径 */}
-        <PathGroup
-          items={pathItems}
-          values={state.paths}
-          onChange={(k, v) => dispatch({ type: 'SET_PATH', key: k as PickKey, value: v })}
-        />
+    <>
+      <div className="w-full overflow-auto p-3 pt-[calc(theme(spacing.10)+theme(spacing.3))]">
+        <div className="flex flex-col gap-6">
+          {/* 路径 */}
+          <PathGroup
+            items={pathItems}
+            values={state.paths}
+            onChange={(k, v) => dispatch({ type: 'SET_PATH', key: k as PickKey, value: v })}
+          />
 
-        {/* 封面 + 预览 */}
-        <CoverPicker value={state.paths.cover} onChange={v => dispatch({ type: 'SET_PATH', key: 'cover', value: v })} />
+          {/* 目录状态显示 */}
+          {folderStatus.performerName && (
+            <div
+              className={cn(
+                'rounded-md px-4 py-3 text-sm flex items-center gap-3 mt-2',
+                folderStatus.exists === null
+                  ? 'bg-default-100 text-default-600'
+                  : folderStatus.exists
+                    ? 'bg-success-100 text-success-700'
+                    : 'bg-warning-100 text-warning-700',
+              )}>
+              {folderStatus.exists === null && <Loader2 className="w-4 h-4 animate-spin" />}
+              {folderStatus.exists === true && <Check className="w-4 h-4" />}
+              {folderStatus.exists === false && <AlertCircle className="w-4 h-4" />}
+              <div className="flex-1">
+                <div className="font-semibold">Save directory:</div>
+                <div className="font-mono text-xs break-all mt-1">{folderStatus.fullPath}</div>
+              </div>
+              {!folderStatus.exists && <div className="text-xs text-warning-600">Folder does not exist</div>}
+            </div>
+          )}
 
-        {/* 元数据 */}
-        <MetaForm state={state.meta} onChange={(k, v) => dispatch({ type: 'SET_META', key: k, value: v })} />
+          {/* 封面 + 预览 */}
+          <CoverPicker
+            value={state.paths.cover}
+            onChange={v => dispatch({ type: 'SET_PATH', key: 'cover', value: v })}
+          />
 
-        {/* 执行 */}
-        <Button
-          variant="flat"
-          radius="sm"
-          color={canRun ? 'primary' : 'default'}
-          isDisabled={!canRun}
-          isLoading={isPending}
-          onPress={() => mutate()}>
-          <MousePointerClick className="text-lg" />
-          Run
-        </Button>
+          {/* 元数据 */}
+          <MetaForm state={state.meta} onChange={(k, v) => dispatch({ type: 'SET_META', key: k, value: v })} />
+
+          {/* 执行 */}
+          <Button
+            variant="flat"
+            radius="sm"
+            color={canRun ? 'primary' : 'default'}
+            isDisabled={!canRun}
+            isLoading={isPending}
+            onPress={() => mutate()}>
+            <MousePointerClick className="text-lg" />
+            Run
+          </Button>
+        </div>
       </div>
-    </div>
+
+      {/* 创建确认对话框 */}
+      {showCreateDialog && folderStatus && (
+        <Modal isOpen={true} onClose={() => setShowCreateDialog(false)} backdrop="blur" radius="sm" hideCloseButton>
+          <ModalContent>
+            <ModalHeader>
+              <div className="flex items-center gap-2">
+                <FolderIcon className="w-5 h-5 text-warning" />
+                <span>Create Performer Folder?</span>
+              </div>
+            </ModalHeader>
+            <ModalBody>
+              <div className="space-y-3">
+                <p className="text-default-600">Performer folder does not exist:</p>
+                <div className="bg-default-100 rounded-md px-3 py-2 font-mono text-sm border border-warning-200">
+                  {folderStatus.fullPath}
+                </div>
+                <p className="text-sm text-default-500">Do you want to create it automatically?</p>
+              </div>
+            </ModalBody>
+            <ModalFooter>
+              <Button variant="light" onPress={handleCancelCreate}>
+                <X className="w-4 h-4 mr-1" />
+                Cancel
+              </Button>
+              <Button color="primary" onPress={handleCreateFolder}>
+                <FolderPlus className="w-4 h-4 mr-1" />
+                Create Now
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      )}
+    </>
   );
 };
