@@ -32,6 +32,9 @@ export const Performers = () => {
   };
   if (isLoading) return <Spinner className="m-auto" />;
   if (error) return <div className="p-6 text-danger">{String(error.message)}</div>;
+
+  const sortedData = [...data].sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
+
   return (
     <div className="flex h-full w-full flex-col gap-2 overflow-auto pt-[calc(theme(spacing.10)+theme(spacing.2))]">
       {/* 顶部操作栏 */}
@@ -42,8 +45,8 @@ export const Performers = () => {
       </header>
       {/* 卡片列表*/}
       <main className="min-h-screen  via-gray-800 to-black p-8">
-        {data.length === 0 && <div className="col-span-full text-center text-default-500">No performers yet</div>}
-        {data.map(performer => (
+        {sortedData.length === 0 && <div className="col-span-full text-center text-default-500">No performers yet</div>}
+        {sortedData.map(performer => (
           <PerformerCard key={performer.id} performer={performer} onEdit={() => {}} onDelete={() => {}} />
         ))}
       </main>

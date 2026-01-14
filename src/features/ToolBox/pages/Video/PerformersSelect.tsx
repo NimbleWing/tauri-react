@@ -2,7 +2,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { Spinner, cn } from '@heroui/react';
 import { Check, TagIcon, X } from 'lucide-react';
-import { getPerformers, Performer } from '@/features/HYP';
+import { getPerformers } from '@/features/HYP';
+import type { PerformerDetailVo } from '@/lib/bindings/PerformerDetailVo';
 
 type Props = {
   value: string[]; // 外部受控值
@@ -15,7 +16,9 @@ export function PerformersSelect({ value, onChange, max = 0, single = false }: P
   const { data = [], isLoading } = useQuery({ queryKey: ['performers'], queryFn: getPerformers });
   if (isLoading) return <Spinner size="sm" />;
 
-  const toggle = (t: Performer) => {
+  const sortedData = [...data].sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
+
+  const toggle = (t: PerformerDetailVo) => {
     if (single) {
       // 单选：点同一下取消，点不同替换
       onChange(value[0] === t.name ? [] : [t.name]);
@@ -30,7 +33,7 @@ export function PerformersSelect({ value, onChange, max = 0, single = false }: P
 
   return (
     <div className="flex flex-wrap gap-3">
-      {data.map(performer => {
+      {sortedData.map(performer => {
         const selected = value.includes(performer.name);
         if (performer.id == null) return null; // 空值守卫
         return (
