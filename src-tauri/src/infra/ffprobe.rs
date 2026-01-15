@@ -36,6 +36,8 @@ pub struct FFProbeFormatTags {
     pub subtitle: Option<String>,
     #[serde(rename = "CODE")]
     pub code: Option<String>,
+    #[serde(rename = "RATING")]
+    pub rating: Option<String>,
 }
 #[derive(Debug, Deserialize)]
 pub struct VideoFile {
@@ -50,6 +52,7 @@ pub struct VideoFile {
     pub studio: Option<String>,
     pub subtitle: Option<String>,
     pub code: Option<String>,
+    pub rating: Option<String>,
 }
 
 pub async fn probe_video_info(video_path: &Path) -> Result<VideoFile> {
@@ -105,5 +108,6 @@ fn parse<P: AsRef<Path>>(probe_json: FFProbeJSON, file_path: P) -> Result<VideoF
         studio: tags.studio,
         subtitle: tags.subtitle,
         code: tags.code,
+        rating: tags.rating,
     })
 }

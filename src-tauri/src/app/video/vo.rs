@@ -18,4 +18,5 @@ pub struct VideoProbeDetailVo {
     pub base64_cover: Option<String>,
     #[ts(type = "number")]
     pub size: u64,
+    pub rating: Option<String>,
 }

@@ -76,6 +76,7 @@ impl VideoService {
                     height: video.height,
                     base64_cover: cover_image,
                     size: video.size,
+                    rating: video.rating,
                 })
             }
             Err(e) => {

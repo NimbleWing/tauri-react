@@ -18,6 +18,29 @@ export const VideoProbeCard = ({ video }: VideoProbeCardProps) => {
     return `${width}x${height}`;
   };
 
+  const getRatingColor = (rating: number) => {
+    if (rating >= 76)
+      return {
+        from: 'from-emerald-500',
+        via: 'via-cyan-500',
+        to: 'to-teal-500',
+        glow: 'shadow-emerald-500/50',
+      };
+    if (rating >= 51)
+      return {
+        from: 'from-yellow-500',
+        via: 'via-orange-500',
+        to: 'to-amber-500',
+        glow: 'shadow-yellow-500/50',
+      };
+    return {
+      from: 'from-red-500',
+      via: 'from-rose-500',
+      to: 'to-pink-500',
+      glow: 'shadow-red-500/50',
+    };
+  };
+
   return (
     <div className="bg-gray-900 rounded-2xl overflow-hidden  mx-auto relative group">
       {/* Glowing border effect */}
@@ -86,10 +109,19 @@ export const VideoProbeCard = ({ video }: VideoProbeCardProps) => {
 
         {/* Content */}
         <div className="p-6">
-          {/* Title */}
-          <h3 className="text-xl font-bold text-white mb-2 line-clamp-2 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            {video.title}
-          </h3>
+          {/* Title with Rating Badge */}
+          <div className="flex items-start gap-3 mb-2">
+            {video.rating && (
+              <div
+                className={`relative w-12 h-12 flex-shrink-0 rounded-full bg-gradient-to-br ${getRatingColor(parseInt(video.rating)).from} ${getRatingColor(parseInt(video.rating)).via} ${getRatingColor(parseInt(video.rating)).to} flex items-center justify-center shadow-lg ${getRatingColor(parseInt(video.rating)).glow} hover:scale-110 transition-transform duration-200`}>
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/20 to-transparent"></div>
+                <span className="relative text-white text-sm font-bold font-mono">{video.rating}</span>
+              </div>
+            )}
+            <h3 className="text-xl font-bold text-white line-clamp-2 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent flex-1">
+              {video.title}
+            </h3>
+          </div>
 
           {/* Subtitle */}
           {video.subtitle && <p className="text-gray-400 text-sm mb-4 italic font-light">{video.subtitle}</p>}
