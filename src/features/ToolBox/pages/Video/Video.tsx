@@ -252,10 +252,10 @@ export const VideoTool = () => {
           />
 
           {/* 目录状态显示 */}
-          {folderStatus.performerName && (
+          {folderStatus.performerName ? (
             <div
               className={cn(
-                'rounded-md px-4 py-3 text-sm flex items-center gap-3 mt-2',
+                'rounded-md px-4 py-3 text-sm flex items-center gap-3 mt-2 min-h-[72px]',
                 folderStatus.exists === null
                   ? 'bg-default-100 text-default-600'
                   : folderStatus.exists
@@ -270,6 +270,13 @@ export const VideoTool = () => {
                 <div className="font-mono text-xs break-all mt-1">{folderStatus.fullPath}</div>
               </div>
               {!folderStatus.exists && <div className="text-xs text-warning-600">Folder does not exist</div>}
+            </div>
+          ) : (
+            <div className="rounded-md px-4 py-3 text-sm flex items-center gap-3 mt-2 min-h-[72px] bg-default-100 text-default-600">
+              <div className="flex-1">
+                <div className="font-semibold">Select a performer</div>
+                <div className="text-xs mt-1">Choose a performer to view folder status</div>
+              </div>
             </div>
           )}
 
