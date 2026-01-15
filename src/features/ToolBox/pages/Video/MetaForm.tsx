@@ -6,8 +6,9 @@ interface MetaFormProps {
   state: Record<string, string>;
   // 统一更新句柄
   onChange: (key: string, value: string) => void;
+  forceClose?: boolean;
 }
-export function MetaForm({ state, onChange }: MetaFormProps) {
+export function MetaForm({ state, onChange, forceClose = false }: MetaFormProps) {
   return (
     <div className="flex flex-col gap-4">
       <div className="text-large font-semibold">Metadata</div>
@@ -17,6 +18,7 @@ export function MetaForm({ state, onChange }: MetaFormProps) {
           field={field}
           value={state[field.key] ?? ''}
           onChange={v => onChange(field.key, v)}
+          forceClose={forceClose}
         />
       ))}
     </div>

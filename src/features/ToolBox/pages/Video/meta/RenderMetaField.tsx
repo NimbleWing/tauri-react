@@ -4,12 +4,12 @@ import { Input, Slider, Switch } from '@heroui/react';
 import type { MetaField } from './fields';
 import { TagsSelect } from '../TagsSelect';
 import { StudiosSelect } from '../StudiosSelect';
-import { PerformersSelect } from '../PerformersSelect';
+import { PerformersDropdown } from '../PerformersDropdown';
 
 /* 下拉组件映射表 */
 const SELECT_MAP = {
   tags: TagsSelect,
-  performers: PerformersSelect,
+  performers: PerformersDropdown,
   studio: StudiosSelect,
   // country: CountrySelect,
 } as const;
@@ -18,9 +18,10 @@ type Props = {
   field: MetaField;
   value: string;
   onChange: (v: string) => void;
+  forceClose?: boolean;
 };
 
-export function RenderMetaField({ field, value, onChange }: Props) {
+export function RenderMetaField({ field, value, onChange, forceClose = false }: Props) {
   const { component, label, required } = field;
 
   /* ===== 通用 label ===== */
@@ -42,6 +43,7 @@ export function RenderMetaField({ field, value, onChange }: Props) {
           onChange={(val: string[]) => onChange(val.join(','))}
           max={field.select.max}
           single={field.select.single}
+          forceClose={forceClose}
         />
       </div>
     );

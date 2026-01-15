@@ -25,6 +25,7 @@
     "mac-scrollbar": "^0.13.8",
     "minisearch": "^7.2.0",
     "motion": "^12.23.22",
+    "pinyin-pro": "^3.27.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hotkeys-hook": "^5.1.0",

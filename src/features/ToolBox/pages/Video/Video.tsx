@@ -280,7 +280,11 @@ export const VideoTool = () => {
           />
 
           {/* 元数据 */}
-          <MetaForm state={state.meta} onChange={(k, v) => dispatch({ type: 'SET_META', key: k, value: v })} />
+          <MetaForm
+            state={state.meta}
+            onChange={(k, v) => dispatch({ type: 'SET_META', key: k, value: v })}
+            forceClose={showCreateDialog}
+          />
 
           {/* 执行 */}
           <Button
