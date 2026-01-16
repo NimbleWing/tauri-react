@@ -86,7 +86,6 @@ export const Queue = () => {
             isPlaying={player.currentTrack()?.hash === item.hash}
             onToggleSelect={selection.toggle}
             draggableProps={draggableProps}
-            // onShowDetails={trackDetails.show}
             onPlay={async () => {
               await player.goto(index);
               await player.play();

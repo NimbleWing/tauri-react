@@ -26,13 +26,6 @@ export const Player = ({ mini }: PlayerProps) => {
   const player = useMusicPlayerStore();
   const meta = normalizeMeta(player.currentTrack());
   const isPlayerMaximized = player.isPlayerMaximized;
-
-  // const queryLyrics = useQuery({
-  //   queryKey: ['lyrics', player.currentTrack()?.hash],
-  //   queryFn: async () => await getLyrics(player.current!),
-  //   enabled: !!player.current,
-  // });
-
   const [showLyrics, setShowLyrics] = useState(false);
 
   return (
@@ -64,25 +57,8 @@ export const Player = ({ mini }: PlayerProps) => {
         </div>
       ) : (
         <>
-          {/* {!showLyrics || !queryLyrics.data ? (
-            <TrackCover url={player.current?.cover} className="size-80" />
-          ) : !queryLyrics.data.synced ? (
-            <PlainLyricsView data={queryLyrics.data.plain} className="size-full" />
-          ) : (
-            <SyncedLyricsView
-              data={queryLyrics.data.synced}
-              elapsed={player.elapsed}
-              duration={player.current?.duration}
-              onSeek={player.seek}
-              className="h-80"
-            />
-          )} */}
-
           <div className="flex items-center gap-2 w-4/5 p-3 mt-16">
             {meta.title && <div className="text-large mr-auto">{meta.title}</div>}
-
-            {/* {meta.album && <AlbumLink>{meta.album}</AlbumLink>}
-            {meta.artist && <ArtistLink>{meta.artist}</ArtistLink>} */}
           </div>
         </>
       )}
@@ -108,7 +84,6 @@ export const Player = ({ mini }: PlayerProps) => {
           <Button
             size="sm"
             radius="sm"
-            // isDisabled={!queryLyrics.data}
             variant={showLyrics ? 'flat' : 'light'}
             onPress={() => setShowLyrics(!showLyrics)}
             className={cn(

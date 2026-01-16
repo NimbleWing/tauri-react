@@ -1,4 +1,3 @@
-// src/components/TagsSelect.tsx
 import { useQuery } from '@tanstack/react-query';
 import { Spinner, cn } from '@heroui/react';
 import { Check, TagIcon, X } from 'lucide-react';

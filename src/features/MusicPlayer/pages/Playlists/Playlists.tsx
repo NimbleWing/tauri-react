@@ -34,10 +34,6 @@ export const Playlists = () => {
     if (!tracks.length) return addToast({ title: 'Empty Playlist' });
 
     await player.playTracks(tracks);
-    // player.setTemplate(null);
-
-    // setPlayerMaximized(true);
-    // setMiniPlayerVisibility(true);
   };
 
   return (

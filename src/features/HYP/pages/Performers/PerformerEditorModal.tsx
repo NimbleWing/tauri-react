@@ -47,9 +47,6 @@ export const PerformerEditorModal = ({ type, isOpen, onOpenChange, existing, onA
   const [image, setImage] = useState<string>(existing?.image ?? '');
   const [tags, setTags] = useState<number[]>(existing?.tags ?? []);
 
-  /* -------------- 工具函数 -------------- */
-  const isOfType = (t: EditorType) => type[0] === t[0];
-
   /* 图片选择 → base64 */
   const onPickImage = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

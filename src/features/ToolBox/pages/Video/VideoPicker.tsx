@@ -1,4 +1,3 @@
-// src/components/VideoPicker.tsx
 import { useRef, useState } from 'react';
 import { open } from '@tauri-apps/plugin-dialog';
 import { Button, Slider } from '@heroui/react';

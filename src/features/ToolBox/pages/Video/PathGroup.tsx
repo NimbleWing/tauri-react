@@ -1,4 +1,3 @@
-// src/components/PathGroup.tsx
 import { open } from '@tauri-apps/plugin-dialog';
 import { Button } from '@heroui/react';
 import { SquareMousePointer } from 'lucide-react';

@@ -2,7 +2,6 @@ import { invoke, convertFileSrc } from '@tauri-apps/api/core';
 
 export * from './Video';
 
-// export async function AttatchMetadataAndCoverToVideo()
 export type VideoMetadata = {
   title: string;
   subtitle?: string;

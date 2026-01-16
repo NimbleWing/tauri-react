@@ -1,4 +1,3 @@
-// src/pages/VideoTool.tsx
 import { useEffect, useReducer, useRef, useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, ModalContent } from '@heroui/react';
 import { MousePointerClick, Folder as FolderIcon, X, AlertCircle, Loader2, FolderPlus, Check } from 'lucide-react';

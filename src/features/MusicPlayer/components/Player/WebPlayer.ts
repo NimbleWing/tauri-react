@@ -9,10 +9,6 @@ export class WebPlayer implements Player {
 
   constructor() {
     this.player = new MediaPlayer(new Audio());
-
-    // DEBUG - show controls
-    // this.player.controls = true
-    // document.body.appendChild(this.player)
   }
 
   async goto(index: number) {

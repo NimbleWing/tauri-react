@@ -8,7 +8,6 @@ import { CreatePerformerDto, PerformerEditorModal } from './PerformerEditorModal
 
 export const Performers = () => {
   const editor = useDisclosure();
-  // const [dto, setDto] = useState<CreatePerformerDto | null>(null);
   const {
     data = [],
     isLoading,

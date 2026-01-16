@@ -73,10 +73,6 @@ export const Playlist = () => {
 
   const onPlay = async (data: Track | Track[]) => {
     await player.playTracks(data);
-    // player.setTemplate(null);
-
-    // setPlayerMaximized(true);
-    // setMiniPlayerVisibility(true);
   };
 
   const onRemoveTracks = async () => {
@@ -177,7 +173,6 @@ export const Playlist = () => {
             isPlaying={player.currentTrack()?.hash === item.hash}
             onToggleSelect={selection.toggle}
             draggableProps={draggableProps}
-            // onShowDetails={trackDetails.show}
           />
         )}
       </TrackList>

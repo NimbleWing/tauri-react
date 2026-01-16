@@ -1,4 +1,3 @@
-// src/utils/persistent.ts
 const STORAGE_KEY = 'videoTool_state_v2'; // 版本升级
 
 interface PersistedState {

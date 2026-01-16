@@ -1,7 +1,7 @@
 import { Virtuoso } from 'react-virtuoso';
 import { ContainerProps, FooterProps, HeaderProps } from './SortableVirtualList';
 import { cn } from '@heroui/react';
-import type { ItemProps as VirtuosoItemProps, ContextProp as VirtuosoContextProps } from 'react-virtuoso';
+import type { ItemProps as VirtuosoItemProps } from 'react-virtuoso';
 import { useEffect, useState } from 'react';
 export type ListChildren<T> = (item: T, index: number) => React.ReactNode;
 const DEFAULT_OVERSCAN = 10;
@@ -37,7 +37,7 @@ export function VirtualList<T>({
 
 type VirtualItemProps<T> = VirtuosoItemProps<T>;
 
-function VirtualItem<T>({ item, ...props }: VirtualItemProps<T>) {
+function VirtualItem<T>({ item: _, ...props }: VirtualItemProps<T>) {
   // needed to preserve height
   const [size, setSize] = useState(0);
   const knownSize = props['data-known-size'];

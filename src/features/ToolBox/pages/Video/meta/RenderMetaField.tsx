@@ -11,7 +11,6 @@ const SELECT_MAP = {
   tags: TagsSelect,
   performers: PerformersDropdown,
   studio: StudiosSelect,
-  // country: CountrySelect,
 } as const;
 
 type Props = {
