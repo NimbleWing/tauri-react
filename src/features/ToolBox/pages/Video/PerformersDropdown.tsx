@@ -6,6 +6,7 @@ import { Check, X, ChevronDown, ChevronUp, Search, User } from 'lucide-react';
 import { useState, useMemo, useEffect } from 'react';
 import { getPerformers } from '@/features/HYP';
 import type { PerformerDetailVo } from '@/lib/bindings/PerformerDetailVo';
+import { getAssetUrl } from '@/utils/music';
 
 type Props = {
   value: string[];
@@ -82,11 +83,11 @@ export function PerformersDropdown({ value, onChange, max = 0, single = false, f
       const sorted = [...countryPerformers].sort((a, b) => {
         const aPinyin = pinyin(a.name, { toneType: 'none', type: 'all' })
           .flat()
-          .map((item: any) => item.value || '')
+          .map(item => item.first || '')
           .join('');
         const bPinyin = pinyin(b.name, { toneType: 'none', type: 'all' })
           .flat()
-          .map((item: any) => item.value || '')
+          .map(item => item.first || '')
           .join('');
         return aPinyin.localeCompare(bPinyin);
       });
@@ -102,11 +103,11 @@ export function PerformersDropdown({ value, onChange, max = 0, single = false, f
       .sort((a, b) => {
         const aPinyin = pinyin(a.name, { toneType: 'none', type: 'all' })
           .flat()
-          .map((item: any) => item.value || '')
+          .map(item => item.first || '')
           .join('');
         const bPinyin = pinyin(b.name, { toneType: 'none', type: 'all' })
           .flat()
-          .map((item: any) => item.value || '')
+          .map(item => item.first || '')
           .join('');
         return aPinyin.localeCompare(bPinyin);
       });
@@ -203,7 +204,7 @@ export function PerformersDropdown({ value, onChange, max = 0, single = false, f
 
                         {performer.imagePath ? (
                           <img
-                            src={performer.imagePath}
+                            src={getAssetUrl(performer.imagePath, performer.name)}
                             alt={performer.name}
                             className="w-8 h-8 rounded-full object-cover bg-slate-700"
                           />
@@ -286,7 +287,7 @@ export function PerformersDropdown({ value, onChange, max = 0, single = false, f
 
                                 {performer.imagePath ? (
                                   <img
-                                    src={performer.imagePath}
+                                    src={getAssetUrl(performer.imagePath, performer.name)}
                                     alt={performer.name}
                                     className="w-8 h-8 rounded-full object-cover bg-slate-700"
                                   />
