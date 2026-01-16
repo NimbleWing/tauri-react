@@ -1,7 +1,7 @@
 // src/components/TagCard.tsx
 import { Edit, Globe, Star, Tag, Trash } from 'lucide-react';
 import { PerformerDetailVo } from '@/lib/bindings/PerformerDetailVo';
-import { getAssetUrl } from '@/utils/music';
+import { localFileToUrl } from '@/utils/path';
 
 type Props = {
   performer: PerformerDetailVo;
@@ -78,7 +78,7 @@ export const PerformerCard = ({ performer, onEdit, onDelete }: Props) => {
                 <div className="relative overflow-hidden rounded-xl border border-gray-700/50">
                   {performer.imagePath ? (
                     <img
-                      src={getAssetUrl(performer.imagePath, performer.name)}
+                      src={localFileToUrl(performer.imagePath, performer.name)}
                       alt={performer.name}
                       className="w-48 h-64 object-cover transition-transform duration-300 group-hover:scale-105"
                     />

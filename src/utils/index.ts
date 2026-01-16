@@ -1,5 +1,6 @@
 export * from './time';
 export * from './file';
+export * from './path';
 export const reOrder = <T>(items: T[], src: number, dst: number) => {
   const res = Array.from(items);
   const [removed] = res.splice(src, 1);

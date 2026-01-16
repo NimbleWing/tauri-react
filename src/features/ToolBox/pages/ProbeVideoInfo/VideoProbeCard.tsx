@@ -1,7 +1,7 @@
 import { Clock, Film, User, MapPin, Tag, Hash, Building, Monitor, FileText } from 'lucide-react';
 import { VideoProbeDetailVo } from '@/lib/bindings/VideoProbeDetailVo';
 import { useState } from 'react';
-import { getAssetUrl } from '@/utils/music';
+import { localFileToUrl } from '@/utils/path';
 
 type VideoProbeCardProps = {
   video: VideoProbeDetailVo;
@@ -246,7 +246,7 @@ export const VideoProbeCard = ({ video }: VideoProbeCardProps) => {
           {/* Image container */}
           <div className="relative max-w-[95vw] max-h-[95vh] rounded-xl overflow-hidden shadow-2xl border border-white/20">
             <video
-              src={getAssetUrl(video.path, video.title)}
+              src={localFileToUrl(video.path, video.title)}
               poster={video.base64Cover}
               controls
               autoPlay

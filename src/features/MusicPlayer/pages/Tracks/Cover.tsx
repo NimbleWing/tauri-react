@@ -1,4 +1,4 @@
-import { getAssetUrl } from '@/utils/music';
+import { localFileToUrl } from '@/utils/path';
 import { cn, Image } from '@heroui/react';
 import { LucideIcon, MusicIcon } from 'lucide-react';
 
@@ -23,7 +23,7 @@ export const TrackCover = ({ url, className, placeholder: Placeholder = MusicIco
           width="100%"
           height="100%"
           loading="lazy"
-          src={getAssetUrl(url)}
+          src={localFileToUrl(url)}
           classNames={{ wrapper: 'size-full', img: 'size-full object-contain' }}
         />
       ) : (

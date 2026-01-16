@@ -1,4 +1,5 @@
-import { getAssetUrl, normalizeMeta } from '@/utils/music';
+import { localFileToUrl } from '@/utils/path';
+import { normalizeMeta } from '@/utils/music';
 import useMusicPlayerStore from '../../store/musicPlayerStore';
 // import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
@@ -38,7 +39,7 @@ export const Player = ({ mini }: PlayerProps) => {
         <div className="fixed -inset-10 -z-10 brightness-25 saturate-50 blur-2xl">
           <Image
             removeWrapper
-            src={getAssetUrl(player.currentTrack()?.cover || '')}
+            src={localFileToUrl(player.currentTrack()?.cover || '')}
             className="size-full object-cover"
           />
         </div>

@@ -6,7 +6,7 @@ import { Check, X, ChevronDown, ChevronUp, Search, User } from 'lucide-react';
 import { useState, useMemo, useEffect } from 'react';
 import { getPerformers } from '@/features/HYP';
 import type { PerformerDetailVo } from '@/lib/bindings/PerformerDetailVo';
-import { getAssetUrl } from '@/utils/music';
+import { localFileToUrl } from '@/utils/path';
 
 type Props = {
   value: string[];
@@ -204,7 +204,7 @@ export function PerformersDropdown({ value, onChange, max = 0, single = false, f
 
                         {performer.imagePath ? (
                           <img
-                            src={getAssetUrl(performer.imagePath, performer.name)}
+                            src={localFileToUrl(performer.imagePath, performer.name)}
                             alt={performer.name}
                             className="w-8 h-8 rounded-full object-cover bg-slate-700"
                           />
@@ -287,7 +287,7 @@ export function PerformersDropdown({ value, onChange, max = 0, single = false, f
 
                                 {performer.imagePath ? (
                                   <img
-                                    src={getAssetUrl(performer.imagePath, performer.name)}
+                                    src={localFileToUrl(performer.imagePath, performer.name)}
                                     alt={performer.name}
                                     className="w-8 h-8 rounded-full object-cover bg-slate-700"
                                   />

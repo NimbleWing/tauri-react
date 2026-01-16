@@ -1,5 +1,4 @@
 import { formatTime } from './time';
-import { convertFileSrc } from '@tauri-apps/api/core';
 import { Track } from '@/features/MusicPlayer/pages/Tracks';
 export const normalizeMeta = (track?: Track | null) => {
   return {
@@ -11,13 +10,6 @@ export const normalizeMeta = (track?: Track | null) => {
     date: track?.date,
     genre: track?.genre,
   };
-};
-
-export const getAssetUrl = (path: string, updateTime: string) => {
-  if (path.startsWith('http')) {
-    return path;
-  }
-  return convertFileSrc(path) + `?t=${updateTime}`;
 };
 
 export function normalizeMediaError(error: MediaError | null) {

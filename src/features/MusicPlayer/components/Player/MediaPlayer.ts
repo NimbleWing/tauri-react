@@ -1,4 +1,5 @@
-import { getAssetUrl, normalizeMediaError } from '@/utils/music';
+import { localFileToUrl } from '@/utils/path';
+import { normalizeMediaError } from '@/utils/music';
 
 export class MediaPlayer {
   core: HTMLAudioElement; // | HTMLVideoElement
@@ -13,7 +14,7 @@ export class MediaPlayer {
   }
 
   load(src: string | null) {
-    this.core.src = src ? getAssetUrl(src) : '';
+    this.core.src = src ? localFileToUrl(src) : '';
     this.core.load();
   }
 

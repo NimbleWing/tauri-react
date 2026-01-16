@@ -1,7 +1,7 @@
 // src/components/TagCard.tsx
 import { Button } from '@heroui/react';
 import type { Studio } from '.';
-import { getAssetUrl } from '@/utils/music';
+import { localFileToUrl } from '@/utils/path';
 import { Card, CardHeader, CardFooter, Image } from '@heroui/react';
 
 type Props = {
@@ -28,7 +28,7 @@ export function StudioCard({ studio }: Props) {
         removeWrapper
         alt="Card example background"
         className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
-        src={getAssetUrl(studio.imagePath || '', studio.updatedAt!)}
+        src={localFileToUrl(studio.imagePath || '', studio.updatedAt!)}
       />
       <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
         <div>
