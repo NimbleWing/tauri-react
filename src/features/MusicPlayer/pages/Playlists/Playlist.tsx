@@ -27,7 +27,6 @@ export const Playlist = () => {
   const selection = useTrackSelection();
   const editorModal = useDisclosure();
   const removeSelectedTracksModal = useDisclosure();
-  // const trackDetails = useTrackDetails();
   const [editorType, setEditorType] = useState<EditorType | null>(null);
 
   const queryPlaylistTracks = useQuery({
@@ -65,7 +64,6 @@ export const Playlist = () => {
     const dst = result.destination.index;
     if (src === dst) return;
 
-    // optimistic update for smooth user experience
     setFiltered(state => reOrder(state, src, dst));
 
     await reOrderPlaylistTracks(params.name, filtered[src], src, dst);

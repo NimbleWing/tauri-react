@@ -43,17 +43,13 @@ export const VideoProbeCard = ({ video }: VideoProbeCardProps) => {
 
   return (
     <div className="bg-gray-900 rounded-2xl overflow-hidden  mx-auto relative group">
-      {/* Glowing border effect */}
       <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl -z-10"></div>
       <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-30 transition-opacity duration-500 -z-10"></div>
 
-      {/* Main card with glassmorphism */}
       <div className="relative bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-2xl overflow-hidden">
-        {/* Cover Image */}
         <div className="relative h-64 overflow-hidden">
           {video.base64Cover ? (
             <>
-              {/* 1. 缩略图（正常显示） */}
               <img
                 onClick={() => setIsHovering(true)}
                 src={video.base64Cover}
@@ -61,14 +57,11 @@ export const VideoProbeCard = ({ video }: VideoProbeCardProps) => {
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
 
-              {/* 2. 悬停原图层（仅在有图时出现） */}
               <div
                 className="absolute inset-0 flex items-center justify-center
                       opacity-0 group-hover:opacity-100
                       transition-opacity duration-300 pointer-events-none">
-                {/* 玻璃罩 */}
                 <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
-                {/* 原图卡片 */}
                 <div
                   className="relative max-w-[90%] max-h-[90%]
                         rounded-xl overflow-hidden
@@ -79,7 +72,6 @@ export const VideoProbeCard = ({ video }: VideoProbeCardProps) => {
               </div>
             </>
           ) : (
-            /* 3. 无图占位保持原样 */
             <div className="w-full h-full bg-gradient-to-br from-gray-950 via-gray-900 to-black flex items-center justify-center relative overflow-hidden">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(56,189,248,0.1),transparent_70%)]"></div>
               <div className="relative z-10 flex flex-col items-center">
@@ -89,13 +81,11 @@ export const VideoProbeCard = ({ video }: VideoProbeCardProps) => {
             </div>
           )}
 
-          {/* Duration badge */}
           <div className="absolute top-3 right-3 bg-gray-900/80 backdrop-blur-sm text-cyan-400 px-2.5 py-1.5 rounded-lg text-sm font-mono border border-cyan-500/30 flex items-center gap-1">
             <Clock className="w-3 h-3" />
             {video.duration.toDuration()}
           </div>
 
-          {/* Resolution badge */}
           <div
             onClick={() => setIsPlay(true)}
             className="absolute bottom-3 left-3 bg-gray-900/80 backdrop-blur-sm text-purple-400 px-2.5 py-1.5 rounded-lg text-sm font-mono border border-purple-500/30 flex items-center gap-1">
@@ -103,13 +93,10 @@ export const VideoProbeCard = ({ video }: VideoProbeCardProps) => {
             {getResolution(video.width, video.height)}
           </div>
 
-          {/* Scan line effect on hover */}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none"></div>
         </div>
 
-        {/* Content */}
         <div className="p-6">
-          {/* Title with Rating Badge */}
           <div className="flex items-start gap-3 mb-2">
             {video.rating && (
               <div
@@ -123,10 +110,8 @@ export const VideoProbeCard = ({ video }: VideoProbeCardProps) => {
             </h3>
           </div>
 
-          {/* Subtitle */}
           {video.subtitle && <p className="text-gray-400 text-sm mb-4 italic font-light">{video.subtitle}</p>}
 
-          {/* File Size */}
           {video.size !== undefined && (
             <div className="flex items-center gap-2 mb-3">
               <FileText className="w-4 h-4 text-blue-400 flex-shrink-0" />
@@ -136,9 +121,7 @@ export const VideoProbeCard = ({ video }: VideoProbeCardProps) => {
             </div>
           )}
 
-          {/* Metadata Grid */}
           <div className="space-y-3">
-            {/* Performers */}
             {video.performers.length > 0 && (
               <div>
                 <div className="flex items-center gap-2 mb-1.5">
@@ -157,7 +140,6 @@ export const VideoProbeCard = ({ video }: VideoProbeCardProps) => {
               </div>
             )}
 
-            {/* Studio */}
             {video.studio && (
               <div className="flex items-start gap-2">
                 <Building className="w-3.5 h-3.5 text-purple-400 mt-0.5 flex-shrink-0" />
@@ -168,7 +150,6 @@ export const VideoProbeCard = ({ video }: VideoProbeCardProps) => {
               </div>
             )}
 
-            {/* Code */}
             {video.code && (
               <div className="flex items-start gap-2">
                 <Hash className="w-3.5 h-3.5 text-green-400 mt-0.5 flex-shrink-0" />
@@ -179,7 +160,6 @@ export const VideoProbeCard = ({ video }: VideoProbeCardProps) => {
               </div>
             )}
 
-            {/* Country */}
             <div className="flex items-start gap-2">
               <MapPin className="w-3.5 h-3.5 text-amber-400 mt-0.5 flex-shrink-0" />
               <div className="text-xs">
@@ -189,7 +169,6 @@ export const VideoProbeCard = ({ video }: VideoProbeCardProps) => {
             </div>
           </div>
 
-          {/* Tags */}
           {video.tags.length > 0 && (
             <div className="mt-4 pt-4 border-t border-gray-800">
               <div className="flex items-center gap-2 mb-2">
@@ -208,7 +187,6 @@ export const VideoProbeCard = ({ video }: VideoProbeCardProps) => {
             </div>
           )}
 
-          {/* Technical specs footer */}
           <div className="mt-5 pt-3 border-t border-gray-800 flex items-center justify-between text-xs text-gray-500">
             <div className="flex items-center gap-1.5">
               <Monitor className="w-3 h-3 text-gray-500" />
@@ -224,26 +202,20 @@ export const VideoProbeCard = ({ video }: VideoProbeCardProps) => {
         </div>
       </div>
 
-      {/* Full-size hover image modal - centered and much better positioned */}
       {isHovering && video.base64Cover && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          {/* Backdrop */}
           <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setIsHovering(false)} />
 
-          {/* Image container */}
           <div className="relative max-w-[95vw] max-h-[95vh] rounded-xl overflow-hidden shadow-2xl border border-white/20">
             <img src={video.base64Cover} alt={video.title} className="max-w-full max-h-full object-contain" />
-            {/* Close indicator */}
             <div className="absolute top-3 right-3 bg-black/60 text-white px-2 py-1 rounded text-sm"></div>
           </div>
         </div>
       )}
       {isPlay && video.base64Cover && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          {/* Backdrop */}
           <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setIsPlay(false)} />
 
-          {/* Image container */}
           <div className="relative max-w-[95vw] max-h-[95vh] rounded-xl overflow-hidden shadow-2xl border border-white/20">
             <video
               src={localFileToUrl(video.path, video.title)}
@@ -252,7 +224,6 @@ export const VideoProbeCard = ({ video }: VideoProbeCardProps) => {
               autoPlay
               className="max-w-full max-h-full object-contain"
             />
-            {/* Close indicator */}
             <div className="absolute top-3 right-3 bg-black/60 text-white px-2 py-1 rounded text-sm"></div>
           </div>
         </div>

@@ -1,10 +1,8 @@
 import { metaFields } from './meta/fields';
 import { RenderMetaField } from './meta/RenderMetaField';
-/* === Props 定义 === */
 interface MetaFormProps {
   // 与你页面里 state.meta 同形状
   state: Record<string, string>;
-  // 统一更新句柄
   onChange: (key: string, value: string) => void;
   forceClose?: boolean;
 }

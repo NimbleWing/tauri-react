@@ -16,7 +16,6 @@ type MusicPlayerStore = {
   repeat: Repeat | null;
   template: Template | null;
   isShuffled: boolean;
-  // backup queue for reverting shuffle
   backupQueue: Track[];
   error?: Error | null;
   player: Player;
@@ -197,16 +196,14 @@ const useMusicPlayerStore = create<MusicPlayerStore>()(
       next: async () => {
         const state = get();
 
-        // 1. 计算下一索引
         const index = (() => {
-          if (state.repeat?.[0] === 'c') return state.current; // 单曲循环
+          if (state.repeat?.[0] === 'c') return state.current;
           if (state.current + 1 < state.queue.length) return state.current + 1;
-          return state.repeat ? 0 : -1; // 列表循环 or 结束
+          return state.repeat ? 0 : -1;
         })();
 
-        // 2. 到头则重置，否则跳转
         if (index === -1) {
-          await state.reset(); // 你已有的 reset 方法
+          await state.reset();
         } else {
           await state.goto(index);
         }
@@ -214,14 +211,12 @@ const useMusicPlayerStore = create<MusicPlayerStore>()(
       prev: async () => {
         const state = get();
 
-        // 1. 计算上一索引
         const index = (() => {
-          if (state.repeat?.[0] === 'c') return state.current; // 单曲循环
+          if (state.repeat?.[0] === 'c') return state.current;
           if (state.current > 0) return state.current - 1;
-          return state.repeat ? state.queue.length - 1 : -1; // 列表循环 or 结束
+          return state.repeat ? state.queue.length - 1 : -1;
         })();
 
-        // 2. 到头则重置，否则跳转
         if (index === -1) {
           await get().reset();
         } else {
@@ -295,22 +290,17 @@ const useMusicPlayerStore = create<MusicPlayerStore>()(
         await state.goto(from);
         await state.play();
       },
-      /* ---------- 追加队列（去重） ---------- */
       appendToQueue: async (tracks: Track[]) => {
         const state = get();
 
-        // 1. 去重：过滤掉 queue 里已经存在的 track（按 hash 比对）
         const filtered = tracks.filter(track => !state.queue.some(item => item.hash === track.hash));
-        if (!filtered.length) return; // 没有新内容，直接结束
+        if (!filtered.length) return;
 
-        // 2. 生成新队列
         const newQueue = [...state.queue, ...filtered];
 
-        // 3. 同步到底层播放器
         await backendPlayer.setQueue(newQueue);
         await webPlayer.setQueue(newQueue);
 
-        // 4. 更新状态
         set({ queue: newQueue });
       },
       setPlayerMaximized: (maximized: boolean) => {

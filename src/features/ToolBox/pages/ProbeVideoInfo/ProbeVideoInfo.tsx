@@ -47,7 +47,6 @@ export const ProbeVideoInfo = () => {
   return (
     <div className="w-full max-w-4xl mx-auto p-6">
       <div className="space-y-8">
-        {/* Header */}
         <div className="text-center">
           <div className="inline-flex items-center gap-2 mb-3 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 px-4 py-2 rounded-full border border-cyan-500/20">
             <Info className="w-4 h-4 text-cyan-400" />
@@ -60,7 +59,6 @@ export const ProbeVideoInfo = () => {
           </p>
         </div>
 
-        {/* File Selection */}
         <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700">
           <PathGroup
             items={pathItems}
@@ -69,7 +67,6 @@ export const ProbeVideoInfo = () => {
           />
         </div>
 
-        {/* Action Button */}
         <div className="flex justify-center">
           <Button
             variant="flat"
@@ -85,7 +82,6 @@ export const ProbeVideoInfo = () => {
           </Button>
         </div>
 
-        {/* Results Section */}
         {videoProbeInfo && (
           <div className="space-y-6">
             <div className="flex items-center gap-2">
@@ -102,7 +98,6 @@ export const ProbeVideoInfo = () => {
           </div>
         )}
 
-        {/* Empty state hint */}
         {!videoProbeInfo && (
           <div className="text-center py-12">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-800/50 rounded-full mb-4">

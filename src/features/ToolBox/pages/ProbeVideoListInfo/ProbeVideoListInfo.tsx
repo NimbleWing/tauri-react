@@ -7,7 +7,6 @@ import { ProbeVideoList } from '.';
 import { VideoProbeDetailVo } from '@/lib/bindings/VideoProbeDetailVo';
 import { VideoProbeCard } from '../ProbeVideoInfo/VideoProbeCard';
 import { listen } from '@tauri-apps/api/event';
-// import { VideoProbeCard } from './VideoProbeCard';
 
 type PickKey = 'videoDir';
 interface State {
@@ -56,7 +55,6 @@ export const ProbeVideoListInfo = () => {
   return (
     <div className="w-full mx-auto p-6">
       <div className="space-y-8">
-        {/* Header */}
         <div className="text-center">
           <div className="inline-flex items-center gap-2 mb-3 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 px-4 py-2 rounded-full border border-cyan-500/20">
             <Info className="w-4 h-4 text-cyan-400" />
@@ -69,7 +67,6 @@ export const ProbeVideoListInfo = () => {
           </p>
         </div>
 
-        {/* File Selection */}
         <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700">
           <PathGroup
             items={pathItems}
@@ -78,7 +75,6 @@ export const ProbeVideoListInfo = () => {
           />
         </div>
 
-        {/* Action Button */}
         <div className="flex justify-center">
           <Button
             variant="flat"
@@ -94,10 +90,8 @@ export const ProbeVideoListInfo = () => {
           </Button>
         </div>
 
-        {/* ==========  Results Section  ========== */}
         {videoListProbeInfo.length > 0 && (
           <div className="space-y-4 @container">
-            {/* 头部信息 + 清空按钮 */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-px bg-gradient-to-r from-cyan-500 to-purple-500" />
@@ -110,7 +104,6 @@ export const ProbeVideoListInfo = () => {
               </Button>
             </div>
 
-            {/* 结果卡片列表 */}
             <div
               className={cn(
                 'grid gap-4',
@@ -125,7 +118,6 @@ export const ProbeVideoListInfo = () => {
           </div>
         )}
 
-        {/* Empty state hint */}
         {videoListProbeInfo.length === 0 && (
           <div className="text-center py-12">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-800/50 rounded-full mb-4">

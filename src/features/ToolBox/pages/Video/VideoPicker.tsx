@@ -5,7 +5,7 @@ import { SquareMousePointer, X, Play, Pause } from 'lucide-react';
 import { pathToUrl } from '.';
 
 type Props = {
-  value: string; // 绝对路径
+  value: string;
   onChange: (v: string) => void;
 };
 
@@ -48,7 +48,6 @@ export function VideoPicker({ value, onChange }: Props) {
               src={pathToUrl(value)}
               onEnded={() => setPlaying(false)}
             />
-            {/* 播放/暂停 */}
             <Button
               isIconOnly
               size="sm"
@@ -59,7 +58,6 @@ export function VideoPicker({ value, onChange }: Props) {
               onPress={togglePlay}>
               {playing ? <Pause /> : <Play />}
             </Button>
-            {/* 清空 */}
             <Button
               isIconOnly
               size="sm"
@@ -72,7 +70,6 @@ export function VideoPicker({ value, onChange }: Props) {
             </Button>
           </div>
 
-          {/* 音量条 (可选) */}
           <Slider
             label="Volume"
             size="sm"

@@ -9,13 +9,11 @@ interface PersistedState {
   meta: Record<string, string>;
 }
 
-/** 读取 + 迁移缺省值 */
 export function loadState(): PersistedState {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return getDefaultState();
     const parsed = JSON.parse(raw) as PersistedState;
-    // 后续加字段时在这里 merge 缺省值
     return {
       paths: { ...getDefaultState().paths, ...parsed.paths },
       meta: { ...getDefaultState().meta, ...parsed.meta },
@@ -25,7 +23,6 @@ export function loadState(): PersistedState {
   }
 }
 
-/** 存盘（防抖外层调用） */
 export function saveState(state: PersistedState): void {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -34,7 +31,6 @@ export function saveState(state: PersistedState): void {
   }
 }
 
-/** 初始缺省值（与你在组件里写的一致） */
 function getDefaultState(): PersistedState {
   return {
     paths: { outputBaseDir: '', video: '', cover: '' },

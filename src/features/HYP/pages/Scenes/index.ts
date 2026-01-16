@@ -11,7 +11,7 @@ export interface SceneItem {
   path: string;
   tags: IdName[];
   performers: IdName[];
-  studio?: IdName; // 可能为空
+  studio?: IdName;
 }
 export const getScenes = async () => {
   return await invoke<SceneItem[]>('hyp_scene_list');

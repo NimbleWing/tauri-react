@@ -13,7 +13,6 @@ import { getPerformers } from '@/features/HYP';
 import { invoke } from '@tauri-apps/api/core';
 import { cn } from '@heroui/react';
 
-/* ---------------- 类型 & 初始值 ---------------- */
 type PickKey = 'outputBaseDir' | 'video' | 'cover';
 interface State {
   paths: Record<PickKey, string>;
@@ -33,9 +32,7 @@ function reducer(state: State, action: { type: 'SET_PATH' | 'SET_META'; key?: st
   return state;
 }
 
-/* ---------------- 主组件 ---------------- */
 export const VideoTool = () => {
-  /* 1. 初次挂载：读缓存 → 初始化 */
   const [state, dispatch] = useReducer(reducer, loadState());
   /* 2. 任何字段变动后 1s 自动存（防抖）*/
   const timerRef = useRef<number | null>(null);
@@ -79,7 +76,6 @@ export const VideoTool = () => {
       folderStatus.exists === true,
   );
 
-  /* 查询 performers 用于检查文件夹 */
   useQuery({
     queryKey: ['performers'],
     queryFn: getPerformers,
@@ -243,14 +239,12 @@ export const VideoTool = () => {
     <>
       <div className="w-full overflow-auto p-3 pt-[calc(theme(spacing.10)+theme(spacing.3))]">
         <div className="flex flex-col gap-6">
-          {/* 路径 */}
           <PathGroup
             items={pathItems}
             values={state.paths}
             onChange={(k, v) => dispatch({ type: 'SET_PATH', key: k as PickKey, value: v })}
           />
 
-          {/* 目录状态显示 */}
           {folderStatus.performerName ? (
             <div
               className={cn(
@@ -279,20 +273,17 @@ export const VideoTool = () => {
             </div>
           )}
 
-          {/* 封面 + 预览 */}
           <CoverPicker
             value={state.paths.cover}
             onChange={v => dispatch({ type: 'SET_PATH', key: 'cover', value: v })}
           />
 
-          {/* 元数据 */}
           <MetaForm
             state={state.meta}
             onChange={(k, v) => dispatch({ type: 'SET_META', key: k, value: v })}
             forceClose={showCreateDialog}
           />
 
-          {/* 执行 */}
           <Button
             variant="flat"
             radius="sm"
@@ -306,7 +297,6 @@ export const VideoTool = () => {
         </div>
       </div>
 
-      {/* 创建确认对话框 */}
       {showCreateDialog && folderStatus && (
         <Modal isOpen={true} onClose={() => setShowCreateDialog(false)} backdrop="blur" radius="sm" hideCloseButton>
           <ModalContent>

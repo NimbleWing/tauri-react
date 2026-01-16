@@ -2,7 +2,7 @@ import { localFileToUrl } from '@/utils/path';
 import { normalizeMediaError } from '@/utils/music';
 
 export class MediaPlayer {
-  core: HTMLAudioElement; // | HTMLVideoElement
+  core: HTMLAudioElement;
   error: Error | null = null;
 
   constructor(core: HTMLAudioElement) {

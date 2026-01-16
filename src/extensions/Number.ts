@@ -1,7 +1,7 @@
 Number.prototype.toDuration = function (unit: 'seconds' | 'milliseconds' = 'seconds') {
   let seconds: number;
   if (unit === 'milliseconds') {
-    seconds = this.valueOf() / 1000; // 将毫秒转换为秒
+    seconds = this.valueOf() / 1000;
   } else {
     seconds = this.valueOf();
   }

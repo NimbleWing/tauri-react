@@ -29,8 +29,8 @@ export const router = createBrowserRouter([
 
         children: [
           {
-            index: true, // Matches the exact parent path ("/")
-            Component: () => <Navigate to="/music/tracks" replace />, // Immediately redirects to "/home"
+            index: true,
+            Component: () => <Navigate to="/music/tracks" replace />,
           },
           { path: 'tracks', Component: MusicTrack },
           { path: 'tracks/:hash', Component: MusicTrack },

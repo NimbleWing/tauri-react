@@ -10,7 +10,6 @@ const WindowControls = () => {
   const { t } = useTranslation();
   const [isMaximized, setIsMaximized] = useState(false);
   const [isOnTop, setIsOnTop] = useState(false);
-  // 初始化时获取置顶和最大化状态，并监听窗口事件
   useEffect(() => {
     let unlisten: (() => void) | undefined;
 
@@ -33,9 +32,8 @@ const WindowControls = () => {
     };
   }, [currentWindow]);
 
-  // 切换置顶
   const handleToggleAlwaysOnTop = async () => {
-    if (isMaximized) return; // 最大化时不可点击
+    if (isMaximized) return;
     await currentWindow.setAlwaysOnTop(!isOnTop);
     setIsOnTop(!isOnTop);
   };

@@ -9,20 +9,17 @@ export default function Home() {
   const [covers, setCovers] = useState<Cover[]>([]);
   const [scanning, setScanning] = useState(false);
 
-  /* 1. 选择目录并启动扫描 */
   const startScan = async () => {
     const dir = await open({ directory: true, multiple: false });
     if (!dir || Array.isArray(dir)) return;
     setCovers([]);
     setScanning(true);
-    // 监听后端事件
     listen<Cover>('cover', event => {
       console.log('收到了');
       setCovers(prev => [...prev, event.payload]);
     });
     await invoke('video_cover', { dir });
     setScanning(false);
-    // unlisten(); // 可选：扫完就停止监听
   };
 
   return (

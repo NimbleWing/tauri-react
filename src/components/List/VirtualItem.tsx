@@ -4,7 +4,6 @@ import type { ItemProps as VirtuosoItemProps } from 'react-virtuoso';
 type VirtualItemProps<T> = VirtuosoItemProps<T>;
 
 export const VirtualItem = <T,>({ item: _, ...props }: VirtualItemProps<T>) => {
-  // needed to preserve height
   const [size, setSize] = useState(0);
   const knownSize = props['data-known-size'];
   useEffect(() => {

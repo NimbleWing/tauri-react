@@ -1,4 +1,3 @@
-// src/components/TagCard.tsx
 import { Edit, Globe, Star, Tag, Trash } from 'lucide-react';
 import { PerformerDetailVo } from '@/lib/bindings/PerformerDetailVo';
 import { localFileToUrl } from '@/utils/path';
@@ -11,13 +10,11 @@ type Props = {
 
 export const PerformerCard = ({ performer, onEdit, onDelete }: Props) => {
   const renderRating = (rating: number) => {
-    // Convert 100-point scale to 5-star scale (20 points = 1 star)
     const starRating = rating / 20;
     const fullStars = Math.floor(starRating);
     const hasHalfStar = starRating % 1 >= 0.5;
     const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
-    // Determine color based on rating
     let ratingColor = 'text-green-400';
     if (rating >= 90) ratingColor = 'text-emerald-400';
     else if (rating >= 80) ratingColor = 'text-green-400';
@@ -50,11 +47,9 @@ export const PerformerCard = ({ performer, onEdit, onDelete }: Props) => {
 
   return (
     <div className="relative">
-      {/* Glowing background effect */}
       <div className="absolute -inset-0.5 bg-gradient-to-r from-violet-600 to-purple-600 rounded-2xl opacity-20 blur"></div>
 
       <div className="relative bg-gray-800/50 backdrop-blur-xl border border-gray-700/50 rounded-2xl overflow-hidden hover:border-violet-500/30 transition-all duration-300">
-        {/* Header with subtle gradient */}
         <div className="bg-gradient-to-r from-gray-900/80 to-gray-800/80 px-6 py-4 border-b border-gray-700/50">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-bold text-white">{performer.name}</h2>
@@ -68,10 +63,8 @@ export const PerformerCard = ({ performer, onEdit, onDelete }: Props) => {
           <div className="mt-2">{renderRating(performer.rating)}</div>
         </div>
 
-        {/* Main content */}
         <div className="p-6">
           <div className="flex flex-col md:flex-row gap-6">
-            {/* Image section */}
             <div className="flex-shrink-0">
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 to-purple-600 rounded-xl opacity-0 group-hover:opacity-20 blur transition duration-300"></div>
@@ -91,7 +84,6 @@ export const PerformerCard = ({ performer, onEdit, onDelete }: Props) => {
               </div>
             </div>
 
-            {/* Tags section */}
             <div className="flex-1">
               <div className="flex items-center mb-4">
                 <Tag className="w-5 h-5 text-violet-400 mr-2" />
@@ -110,7 +102,6 @@ export const PerformerCard = ({ performer, onEdit, onDelete }: Props) => {
           </div>
         </div>
 
-        {/* Action buttons */}
         {(onEdit || onDelete) && (
           <div className="px-6 py-4 bg-gray-900/30 border-t border-gray-700/50">
             <div className="flex items-center justify-between">
@@ -137,7 +128,6 @@ export const PerformerCard = ({ performer, onEdit, onDelete }: Props) => {
           </div>
         )}
 
-        {/* Footer without actions */}
         {!onEdit && !onDelete && (
           <div className="px-6 py-4 bg-gray-900/30 border-t border-gray-700/50">
             <div className="flex items-center justify-between text-sm text-gray-400">

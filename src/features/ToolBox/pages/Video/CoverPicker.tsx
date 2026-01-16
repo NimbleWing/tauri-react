@@ -50,7 +50,6 @@ export function CoverPicker({ value, onChange }: Props) {
             </Button>
           </div>
 
-          {/* 放大查看 */}
           {big && (
             <div
               className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"

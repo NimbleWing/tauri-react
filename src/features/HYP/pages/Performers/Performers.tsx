@@ -4,7 +4,6 @@ import { PlusIcon } from 'lucide-react';
 import { addPerformer, getPerformers } from '.';
 import { PerformerCard } from './PerformerCard';
 import { CreatePerformerDto, PerformerEditorModal } from './PerformerEditorModal';
-// import { useState } from 'react';
 
 export const Performers = () => {
   const editor = useDisclosure();
@@ -36,20 +35,17 @@ export const Performers = () => {
 
   return (
     <div className="flex h-full w-full flex-col gap-2 overflow-auto pt-[calc(theme(spacing.10)+theme(spacing.2))]">
-      {/* 顶部操作栏 */}
       <header className="sticky top-0 z-10 flex items-center gap-3 bg-default-50/25 px-6 py-3 backdrop-blur-lg">
         <Button radius="sm" variant="flat" onPress={editor.onOpen}>
           <PlusIcon className="text-lg" /> Create New
         </Button>
       </header>
-      {/* 卡片列表*/}
       <main className="min-h-screen  via-gray-800 to-black p-8">
         {sortedData.length === 0 && <div className="col-span-full text-center text-default-500">No performers yet</div>}
         {sortedData.map(performer => (
           <PerformerCard key={performer.id} performer={performer} onEdit={() => {}} onDelete={() => {}} />
         ))}
       </main>
-      {/* 新建/编辑弹窗 */}
       <PerformerEditorModal type="new" isOpen={editor.isOpen} onOpenChange={editor.onOpenChange} onAction={handleAdd} />
     </div>
   );

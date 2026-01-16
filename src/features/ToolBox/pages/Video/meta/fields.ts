@@ -2,11 +2,11 @@ export interface MetaField {
   key: string;
   label: string;
   required?: boolean;
-  component: 'input' | 'select' | 'switch' | 'slider'; // 随时扩展
+  component: 'input' | 'select' | 'switch' | 'slider';
   /* ===== 组件专属参数 ===== */
-  select?: { dataKey: string; max?: number; single?: boolean }; // 下拉/多选
-  switch?: { defaultOn?: boolean }; // 开关
-  slider?: { min: number; max: number; step?: number }; // 滑块
+  select?: { dataKey: string; max?: number; single?: boolean };
+  switch?: { defaultOn?: boolean };
+  slider?: { min: number; max: number; step?: number };
 }
 export const metaFields: MetaField[] = [
   { key: 'title', label: 'Title', required: true, component: 'input' },

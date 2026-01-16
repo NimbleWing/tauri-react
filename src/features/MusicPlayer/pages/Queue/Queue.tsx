@@ -15,22 +15,18 @@ export const Queue = () => {
   const onRemove = async () => {
     if (!player.current) return;
 
-    // case: remove all tracks when selection is empty, reset player state
     if (!selection.values.length) return await player.reset();
 
     const filtered = player.queue.filter(track => !selection.isSelected(track));
 
-    // case: if remaining queue is empty, reset player state
     if (!filtered.length) await player.reset();
     else {
       await player.setQueue(filtered);
       const index = filtered.findIndex(track => track === player.currentTrack());
 
-      // case: current track was not removed
       if (index !== -1) {
         await player.setCurrent(index);
       } else {
-        // case: current track was removed
         await player.goto(0);
         await player.pause();
       }
@@ -47,7 +43,7 @@ export const Queue = () => {
     if (src === dst) return;
 
     const reordered = reOrder(player.queue, src, dst);
-    const index = reordered.findIndex(it => it === player.currentTrack()); // compare by reference
+    const index = reordered.findIndex(it => it === player.currentTrack());
 
     await player.setQueue(reordered);
     await player.setCurrent(index);

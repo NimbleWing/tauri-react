@@ -6,7 +6,6 @@ import { useMutation } from '@tanstack/react-query';
 import { ScanVideoCMD } from '.';
 import { listen } from '@tauri-apps/api/event';
 
-// 与后端事件对应
 interface ScanProgress {
   current: number;
   total: number;
@@ -15,7 +14,6 @@ interface ScanProgress {
   failed: number;
 }
 
-// 进度条组件
 const CircleProgress = ({ percent }: { percent: number }) => {
   const r = 45;
   const circ = 2 * Math.PI * r;
@@ -91,7 +89,6 @@ export const ScanVideo = () => {
           values={state.paths}
           onChange={(k, v) => dispatch({ type: 'SET_PATH', key: k as PickKey, value: v })}
         />
-        {/* 实时进度卡片 */}
         {progress && (
           <div className="flex items-center gap-4 rounded-xl border border-divider bg-content1 p-4 shadow-sm">
             <CircleProgress percent={percent} />
@@ -102,10 +99,8 @@ export const ScanVideo = () => {
                   {progress.current} / {progress.total}
                 </span>
               </div>
-              {/* 走马灯路径 */}
               <div className="truncate text-xs text-default-400">{progress.currentPath}</div>
               {progress.currentPath}
-              {/* 成功/失败计数 */}
               <div className="mt-2 flex gap-4 text-xs">
                 <span className="text-success">Success: {progress.success}</span>
                 <span className="text-danger">Failed: {progress.failed}</span>
@@ -113,7 +108,6 @@ export const ScanVideo = () => {
             </div>
           </div>
         )}
-        {/* 执行 */}
         <Button
           variant="flat"
           radius="sm"

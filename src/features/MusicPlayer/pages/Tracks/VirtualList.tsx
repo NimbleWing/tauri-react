@@ -38,7 +38,6 @@ export function VirtualList<T>({
 type VirtualItemProps<T> = VirtuosoItemProps<T>;
 
 function VirtualItem<T>({ item: _, ...props }: VirtualItemProps<T>) {
-  // needed to preserve height
   const [size, setSize] = useState(0);
   const knownSize = props['data-known-size'];
 

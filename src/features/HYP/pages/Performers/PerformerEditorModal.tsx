@@ -1,4 +1,3 @@
-// PerformerEditorModal.tsx
 import {
   addToast,
   Button,
@@ -15,12 +14,11 @@ import { CheckIcon, XIcon, UploadCloudIcon } from 'lucide-react';
 import { useState, useCallback, ChangeEvent } from 'react';
 import { TagsIdSelect } from '../Tags/TagsIdSelect';
 
-/* ---------- 类型对齐 Rust DTO ---------- */
 export type CreatePerformerDto = {
   name: string;
-  rating: number | null; // i64 → number
+  rating: number | null;
   country: string | null;
-  image: string | null; // base64
+  image: string | null;
   tags: number[] | null;
 };
 
@@ -30,9 +28,7 @@ type Props = {
   type: EditorType;
   isOpen?: boolean;
   onOpenChange: (v: boolean) => void;
-  /* 如果你只想传 name，可把下面换成 (name: string) => Promise<void> */
   onAction: (dto: CreatePerformerDto) => Promise<void>;
-  /* 编辑时回显用 */
   existing?: CreatePerformerDto | null;
 };
 
@@ -40,14 +36,12 @@ type Props = {
 const COUNTRIES = ['中国', '美国', '日本'];
 
 export const PerformerEditorModal = ({ type, isOpen, onOpenChange, existing, onAction }: Props) => {
-  /* -------------- 本地表单状态 -------------- */
   const [name, setName] = useState(existing?.name ?? '');
   const [rating, setRating] = useState<string>(existing?.rating?.toString() ?? '');
   const [country, setCountry] = useState<string>(existing?.country ?? '');
   const [image, setImage] = useState<string>(existing?.image ?? '');
   const [tags, setTags] = useState<number[]>(existing?.tags ?? []);
 
-  /* 图片选择 → base64 */
   const onPickImage = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -56,7 +50,6 @@ export const PerformerEditorModal = ({ type, isOpen, onOpenChange, existing, onA
     reader.readAsDataURL(file);
   }, []);
 
-  /* 提交 */
   const handleSubmit = async () => {
     try {
       const dto: CreatePerformerDto = {
@@ -73,7 +66,6 @@ export const PerformerEditorModal = ({ type, isOpen, onOpenChange, existing, onA
     }
   };
 
-  /* -------------- 渲染 -------------- */
   const title = type === 'new' ? 'New Performer' : type === 'update' ? 'Edit Performer' : 'Remove Performer';
 
   return (
@@ -86,7 +78,6 @@ export const PerformerEditorModal = ({ type, isOpen, onOpenChange, existing, onA
             <div className="text-default-500">Are you sure you want to remove this performer?</div>
           ) : (
             <>
-              {/* ---- 名称 ---- */}
               <Input
                 autoFocus
                 radius="sm"
@@ -97,7 +88,6 @@ export const PerformerEditorModal = ({ type, isOpen, onOpenChange, existing, onA
                 placeholder="Performer name"
               />
 
-              {/* ---- 评分 0-100 ---- */}
               <Input
                 radius="sm"
                 label="Rating (0-100)"
@@ -110,7 +100,6 @@ export const PerformerEditorModal = ({ type, isOpen, onOpenChange, existing, onA
                 max={100}
               />
 
-              {/* ---- 国家 ---- */}
               <Select
                 radius="sm"
                 label="Country"
@@ -123,7 +112,6 @@ export const PerformerEditorModal = ({ type, isOpen, onOpenChange, existing, onA
                 ))}
               </Select>
 
-              {/* ---- 头像 ---- */}
               <div className="flex items-center gap-2">
                 <label
                   htmlFor="performer-avatar"
@@ -152,7 +140,6 @@ export const PerformerEditorModal = ({ type, isOpen, onOpenChange, existing, onA
                 />
               )}
 
-              {/* ---- 标签 ---- */}
               <TagsIdSelect value={tags} onChange={setTags} />
             </>
           )}
@@ -163,10 +150,7 @@ export const PerformerEditorModal = ({ type, isOpen, onOpenChange, existing, onA
             radius="sm"
             variant="flat"
             color={type === 'remove' ? 'danger' : 'success'}
-            isDisabled={
-              type !== 'remove' && !name.trim()
-              // 你也可以再加其它校验
-            }
+            isDisabled={type !== 'remove' && !name.trim()}
             onPress={handleSubmit}>
             <CheckIcon className="text-lg" />
             {type === 'remove' ? 'Remove' : type === 'new' ? 'Create' : 'Save'}

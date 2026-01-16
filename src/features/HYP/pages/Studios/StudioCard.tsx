@@ -1,4 +1,3 @@
-// src/components/TagCard.tsx
 import { Button } from '@heroui/react';
 import type { Studio } from '.';
 import { localFileToUrl } from '@/utils/path';
@@ -11,12 +10,9 @@ type Props = {
 };
 
 export function StudioCard({ studio }: Props) {
-  /* 样式数据保持原样 - 可以后续换成真实指标 */
   const { id, name } = studio;
   if (id == null) return null; //
-  // const mem = 76.5;
   console.log(studio.imagePath);
-  /* 空值守卫：没 id 就不渲染（或返回禁用样式） */
   if (studio.id === null || studio.id === undefined) return null;
   return (
     <Card isFooterBlurred className="w-full h-[200px] col-span-12 sm:col-span-5">

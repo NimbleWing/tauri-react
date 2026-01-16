@@ -36,14 +36,10 @@ export const MusicTrack = () => {
       const aNum = a.number ?? undefined;
       const bNum = b.number ?? undefined;
 
-      // 两者都无效，保持原序
       if (aNum === undefined && bNum === undefined) return 0;
-      // a 无效，排后面
       if (aNum === undefined) return 1;
-      // b 无效，排后面
       if (bNum === undefined) return -1;
 
-      // 两者都有效，正常排序
       return aNum - bNum;
     });
   };
@@ -56,10 +52,8 @@ export const MusicTrack = () => {
   const setPlayerMaximized = useMusicPlayerStore(s => s.setPlayerMaximized);
   const setMiniPlayerVisibility = useMusicPlayerStore(s => s.setMiniPlayerVisibility);
   const appendToQueue = useMusicPlayerStore(s => s.appendToQueue);
-  // const trackDetails = useTrackDetails();
   const onPlay = async (data: Track | Track[]) => {
     await playTracks(data);
-    // player.setTemplate(null);
     setPlayerMaximized(true);
     setMiniPlayerVisibility(true);
   };

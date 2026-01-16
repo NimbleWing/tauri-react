@@ -63,7 +63,6 @@ export const Albums = () => {
         {(items: Album[]) => (
           <>
             <AlbumListItem
-              // first item's name as key because each album is unique
               key={items[0].name}
               data={items}
               columns={chunkSize}

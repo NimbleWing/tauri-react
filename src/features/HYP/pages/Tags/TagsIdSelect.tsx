@@ -1,11 +1,10 @@
-// src/components/TagsSelect.tsx
 import { useQuery } from '@tanstack/react-query';
 import { Spinner, cn } from '@heroui/react';
 import { Check, TagIcon, X } from 'lucide-react';
 import { getTags, Tag } from '@/features/HYP';
 
 type Props = {
-  value: number[]; // 受控：已选标签 id 数组
+  value: number[];
   onChange: (ids: number[]) => void;
   max?: number; // 最多选几个，0=不限
   single?: boolean; // 是否单选
@@ -17,11 +16,9 @@ export const TagsIdSelect = ({ value, onChange, max = 0, single = false }: Props
 
   const toggle = (t: Tag) => {
     if (single) {
-      // 单选：点同一下取消，点不同替换
       onChange(value[0] === t.id! ? [] : [t.id!]);
       return;
     }
-    // 多选
     const set = new Set(value);
     if (set.has(t.id!)) set.delete(t.id!);
     else if (max === 0 || set.size < max) set.add(t.id!);
@@ -30,7 +27,6 @@ export const TagsIdSelect = ({ value, onChange, max = 0, single = false }: Props
 
   return (
     <div className="flex flex-wrap gap-3">
-      {/* 清空按钮（仅多选且已选时显示）*/}
       {!single && value.length > 0 && (
         <button
           onClick={() => onChange([])}
@@ -55,7 +51,6 @@ export const TagsIdSelect = ({ value, onChange, max = 0, single = false }: Props
                 ? 'bg-gradient-to-r from-green-400/20 to-emerald-500/20 text-emerald-300 shadow-lg shadow-emerald-500/30'
                 : 'bg-slate-800/60 text-slate-300 hover:bg-slate-700/60 hover:text-slate-100',
             )}>
-            {/* 左侧图标 */}
             <div
               className={cn(
                 'flex h-5 w-5 items-center justify-center rounded-full border transition-all',
@@ -68,10 +63,8 @@ export const TagsIdSelect = ({ value, onChange, max = 0, single = false }: Props
               {selected && single && <X className="hidden h-3 w-3 text-emerald-400 group-hover:block" />}
             </div>
 
-            {/* 文字 */}
             <span>{tag.name}</span>
 
-            {/* 已选光条 */}
             {selected && (
               <div className="absolute -inset-px rounded-full bg-gradient-to-r from-emerald-400 to-green-400 opacity-0 blur-sm transition-opacity duration-300 group-hover:opacity-70" />
             )}

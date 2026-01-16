@@ -4,10 +4,10 @@ import { Check, TagIcon, X } from 'lucide-react';
 import { getStudios, Studio } from '@/features/HYP';
 
 type Props = {
-  value: string[]; // 外部受控值
+  value: string[];
   onChange: (val: string[]) => void;
-  max?: number; // 最多选几个，默认 0=不限
-  single?: boolean; // 是否单选
+  max?: number;
+  single?: boolean;
 };
 
 export function StudiosSelect({ value, onChange, max = 0, single = false }: Props) {
@@ -16,11 +16,9 @@ export function StudiosSelect({ value, onChange, max = 0, single = false }: Prop
 
   const toggle = (t: Studio) => {
     if (single) {
-      // 单选：点同一下取消，点不同替换
       onChange(value[0] === t.name ? [] : [t.name]);
       return;
     }
-    // 多选：原有逻辑
     const set = new Set(value);
     if (set.has(t.name)) set.delete(t.name);
     else if (max === 0 || set.size < max) set.add(t.name);
@@ -31,7 +29,7 @@ export function StudiosSelect({ value, onChange, max = 0, single = false }: Prop
     <div className="flex flex-wrap gap-3">
       {data.map(studio => {
         const selected = value.includes(studio.name);
-        if (studio.id == null) return null; // 空值守卫
+        if (studio.id == null) return null;
         return (
           <button
             key={studio.id}
@@ -43,7 +41,6 @@ export function StudiosSelect({ value, onChange, max = 0, single = false }: Prop
                 ? 'bg-gradient-to-r from-green-400/20 to-emerald-500/20 text-emerald-300 shadow-lg shadow-emerald-500/30'
                 : 'bg-slate-800/60 text-slate-300 hover:bg-slate-700/60 hover:text-slate-100',
             )}>
-            {/* 左侧图标 */}
             <div
               className={cn(
                 'flex h-5 w-5 items-center justify-center rounded-full border transition-all',
@@ -56,10 +53,8 @@ export function StudiosSelect({ value, onChange, max = 0, single = false }: Prop
               {selected && single && <X className="hidden h-3 w-3 text-emerald-400 group-hover:block" />}
             </div>
 
-            {/* 文字 */}
             <span>{studio.name}</span>
 
-            {/* 已选动态光条 */}
             {selected && (
               <div className="absolute -inset-px rounded-full bg-gradient-to-r from-emerald-400 to-green-400 opacity-0 blur-sm transition-opacity duration-300 group-hover:opacity-70" />
             )}

@@ -16,7 +16,6 @@ export function isEditorOfType(type: EditorType, expected: EditorType) {
 export const StudioEditorModel = ({ isOpen, onOpenChange, existing, type, onAction }: TagEditorModalProps) => {
   const isOfType = (expected: EditorType) => isEditorOfType(type, expected);
   const [imageB64, setImageB64] = useState<string | undefined>(undefined);
-  /** 选择图片 -> 转 base64 */
   const handlePickImage = () => {
     const input = document.createElement('input');
     input.type = 'file';
