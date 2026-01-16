@@ -122,6 +122,12 @@ export function PerformersDropdown({ value, onChange, max = 0, single = false, f
     }
   }, [forceClose]);
 
+  useEffect(() => {
+    if (!isOpen) {
+      setSearchQuery('');
+    }
+  }, [isOpen]);
+
   if (isLoading) return <Spinner size="sm" />;
 
   return (
