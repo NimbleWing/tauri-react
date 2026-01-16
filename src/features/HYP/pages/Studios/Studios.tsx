@@ -16,7 +16,6 @@ export const Studios = () => {
     queryKey: ['studios'],
     queryFn: getStudios,
   });
-  console.log(data);
   const handleAdd = async (name: string, image?: string) => {
     try {
       await addStudio(name, image);

@@ -1,7 +1,6 @@
 import { localFileToUrl } from '@/utils/path';
 import { normalizeMeta } from '@/utils/music';
 import useMusicPlayerStore from '../../store/musicPlayerStore';
-// import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Button, cn, Image } from '@heroui/react';
 import { TrackCover } from '../../pages/Tracks';
@@ -23,7 +22,6 @@ import { ArtistLink } from '../../pages/Artists';
 type PlayerProps = { mini?: boolean };
 
 export const Player = ({ mini }: PlayerProps) => {
-  console.log('渲染 Player 组件');
   const player = useMusicPlayerStore();
   const meta = normalizeMeta(player.currentTrack());
   const isPlayerMaximized = player.isPlayerMaximized;

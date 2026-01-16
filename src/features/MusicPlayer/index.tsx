@@ -65,14 +65,12 @@ export const allMusicNavItems: MusicNavItem[] = [
   },
 ];
 const Music = () => {
-  console.log('渲染 Music 组件');
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const isMiniPlayerVisible = useMusicPlayerStore(s => s.isMiniPlayerVisible);
   useEffect(() => {
     const { volume } = musicPlayerStore.getState();
-    console.log('恢复音量');
     musicPlayerStore.getState().setVolume(volume).catch(console.error);
   }, []);
   const getVisibleSettings = () => {
@@ -102,7 +100,6 @@ const Music = () => {
                       key={item.key}
                       className="justify-start"
                       onPress={() => {
-                        console.log(`/music/${item.key}`);
                         navigate(`/music/${item.key}`);
                       }}
                       variant={location.pathname.startsWith(`/music/${item.key}`) ? 'flat' : 'light'}

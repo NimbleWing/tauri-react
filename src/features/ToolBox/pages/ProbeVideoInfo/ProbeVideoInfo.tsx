@@ -36,11 +36,10 @@ export const ProbeVideoInfo = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: () => ProbeVideo(state.paths.video),
     onSuccess: data => {
-      console.log(data);
       setVideoProbeInfo(data);
     },
     onError: err => {
-      console.log(err);
+      console.error(err);
     },
   });
 

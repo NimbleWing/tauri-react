@@ -16,7 +16,6 @@ export const Performers = () => {
     queryKey: ['performers'],
     queryFn: getPerformers,
   });
-  console.log(data);
   const handleAdd = async (dto: CreatePerformerDto) => {
     try {
       await addPerformer(dto);

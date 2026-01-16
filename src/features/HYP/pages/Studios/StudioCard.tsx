@@ -12,7 +12,6 @@ type Props = {
 export function StudioCard({ studio }: Props) {
   const { id, name } = studio;
   if (id == null) return null; //
-  console.log(studio.imagePath);
   if (studio.id === null || studio.id === undefined) return null;
   return (
     <Card isFooterBlurred className="w-full h-[200px] col-span-12 sm:col-span-5">

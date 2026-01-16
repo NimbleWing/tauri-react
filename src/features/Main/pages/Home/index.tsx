@@ -15,7 +15,6 @@ export default function Home() {
     setCovers([]);
     setScanning(true);
     listen<Cover>('cover', event => {
-      console.log('收到了');
       setCovers(prev => [...prev, event.payload]);
     });
     await invoke('video_cover', { dir });

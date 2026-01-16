@@ -45,7 +45,6 @@ export const allHYPNavItems: HYPNavItem[] = [
   },
 ];
 export const HYP = () => {
-  console.log('渲染 HYP 组件');
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();

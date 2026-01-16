@@ -132,7 +132,6 @@ const useMusicPlayerStore = create<MusicPlayerStore>()(
       },
       togglePlay: async () => {
         const { isPaused, play, pause } = get();
-        console.log('togglePlay:', isPaused);
         return isPaused ? play() : pause();
       },
       hasNext: () => {
@@ -158,7 +157,6 @@ const useMusicPlayerStore = create<MusicPlayerStore>()(
       pause: async () => {
         const state = get();
         if (state.isPaused || state.error) {
-          console.log('已暂停，请勿重复点击', state.isPaused, state.error);
           return;
         }
         interval.stop();
@@ -168,7 +166,6 @@ const useMusicPlayerStore = create<MusicPlayerStore>()(
       play: async () => {
         const state = get();
         if (!state.isPaused || state.error) {
-          console.log('播放中，请勿重复点击', state.isPaused, state.error);
           return;
         }
         await state.player.play();
@@ -224,7 +221,6 @@ const useMusicPlayerStore = create<MusicPlayerStore>()(
         }
       },
       seek: async (elapsed: number) => {
-        console.log('seek 到:', elapsed);
         const state = get();
         if (state.elapsed === elapsed) {
           return;
@@ -282,7 +278,6 @@ const useMusicPlayerStore = create<MusicPlayerStore>()(
       },
       playTracks: async (data: Track | Track[], from = 0) => {
         const state = get();
-        console.log('是否暂停', state.isPaused);
         const queue = Array.isArray(data) ? data : [data];
         await backendPlayer.setQueue(queue);
         await webPlayer.setQueue(queue);

@@ -39,7 +39,6 @@ export const allSettings: SettingItem[] = [
   },
 ];
 const Settings = () => {
-  console.log('Settings');
   const { t } = useTranslation();
   const [selected, setSelected] = useState<string>('about');
   const getVisibleSettings = () => {

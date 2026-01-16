@@ -195,7 +195,7 @@ export const VideoTool = () => {
         state.paths.cover,
       ),
     onError: (err: string) => {
-      console.log(err);
+      console.error(err);
       addToast({ timeout: 5000, color: 'danger', title: err });
     },
     onSuccess: () => {

@@ -33,7 +33,6 @@ export class MediaPlayer {
   }
 
   async play() {
-    console.log(this.core);
     this.core.play();
   }
 

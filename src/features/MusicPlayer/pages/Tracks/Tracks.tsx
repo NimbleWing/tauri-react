@@ -22,7 +22,6 @@ import PlaylistEditorModal from '../Playlists/PlaylistEditorModal.tsx';
 import { getTracks, parseFilters } from './index.ts';
 
 export const MusicTrack = () => {
-  console.log('渲染 MusicTrack 组件');
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { album, artist } = parseFilters(searchParams);

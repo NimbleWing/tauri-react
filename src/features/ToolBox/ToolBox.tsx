@@ -44,8 +44,6 @@ export const allToolBoxNavItems: ToolBoxNavItem[] = [
   },
 ];
 export const ToolBox = () => {
-  console.log('渲染 ToolBox 组件');
-
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();

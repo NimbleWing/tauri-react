@@ -31,11 +31,9 @@ function reducer(state: State, action: { type: 'SET_PATH' | 'SET_META'; key?: st
 export const ProbeVideoListInfo = () => {
   const [state, dispatch] = useReducer(reducer, { paths: { videoDir: '' } });
   const [videoListProbeInfo, setVideoListProbeInfo] = useState<VideoProbeDetailVo[]>([]);
-  console.log(state);
   const canRun = Boolean(state.paths.videoDir);
   useEffect(() => {
     const unlisten = listen<VideoProbeDetailVo>('probe_video_list', evt => {
-      console.log(evt);
       setVideoListProbeInfo(pre => [...pre, evt.payload]);
     });
     return () => {
@@ -44,11 +42,8 @@ export const ProbeVideoListInfo = () => {
   }, []);
   const { mutate, isPending } = useMutation({
     mutationFn: () => ProbeVideoList(state.paths.videoDir),
-    onSuccess: data => {
-      console.log(data);
-    },
     onError: err => {
-      console.log(err);
+      console.error(err);
     },
   });
 

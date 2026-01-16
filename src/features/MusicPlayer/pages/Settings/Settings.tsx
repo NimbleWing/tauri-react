@@ -2,17 +2,14 @@ import { Button, addToast } from '@heroui/react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { open } from '@tauri-apps/plugin-dialog';
 import { FileScanIcon, PlusIcon, XIcon } from 'lucide-react';
-import { getDirs, getMetaData, scanDirs, setDirs } from '.';
+import { getDirs, scanDirs, setDirs } from '.';
 
 export const MusicSettings = () => {
   const queryDirs = useQuery({ queryKey: ['dirs'], queryFn: getDirs });
-  const b = useQuery({ queryKey: ['b'], queryFn: getMetaData });
-  console.log(b);
   const mutationScan = useMutation({
     mutationFn: scanDirs,
     onError: err => addToast({ timeout: 5000, color: 'danger', title: err.message }),
     onSuccess: result => {
-      console.log('Scanned');
       addToast({
         timeout: 5000,
         title: 'Folders Scanned',

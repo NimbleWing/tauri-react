@@ -10,7 +10,6 @@ export const SideBar = () => {
   const sideBarWidth = useBaseStore(state => state.sideBarWidth);
   const { t } = useTranslation();
   useEffect(() => {
-    console.log(isPc);
     if (!isPc) {
       console.log('isPc', isPc);
     }

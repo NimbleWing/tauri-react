@@ -137,7 +137,6 @@ export const TagEditorModal = ({ isOpen, onOpenChange, existing, type, onAction 
               try {
                 await onAction(name, sortName);
               } catch (err) {
-                console.log(err);
                 addToast({ title, description: (err as Error).message, color: 'danger' });
               }
             }}
